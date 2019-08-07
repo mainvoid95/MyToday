@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Muli|Noto+Sans+KR" rel="stylesheet">
+    <title>오늘 하루</title>
+    <style>
+        *{
+                box-sizing: border-box;
+                font-family: 'Noto Sans KR', sans-serif;
+            }
+
+        body{
+            background-color:  #F5F5F5;
+            color: #000000;
+        }
+        div{
+            padding: 10px;
+
+        }
+        .calspace{
+            width: auto;
+            height: auto;
+            position: absolute;
+            background-color: #FF8A65;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            margin-right: 40%;
+            overflow: auto;
+            padding: 10px;
+        }
+        .todo{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background-color: #FFF8E1;
+        }
+        #cal{
+            background-color: #FF8A65;
+            width: 97%;
+            height: 100%;
+            position: absolute;
+            background-color: #FF8A65;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            margin-right: 250px;
+            overflow: auto;
+        }
+        td{
+            overflow: auto;
+            padding: 10px;
+            width: 10%;
+            height: 12%;
+        }
+        td:hover{
+            background-color: #D32F2F;
+            transition: 0.3s;
+        }
+        .todayhi{
+            color: #FFF8E1;
+        }
+        .nohi td:hover{
+            background-color: #FF8A65;
+        }
+        #pnhi td:hover{
+            background: #D32F2F;
+            transition: 0.3s;
+        }
+
+
+        #todoinput{
+            border: none;
+            border-radius: 0;
+            width: 95%;
+            padding: 10px;
+            float: left;
+            font-size: 16px;
+            background-color:#FFCC80;
+        }   
+            
+        /* #todoaddbutton{
+            padding: 10px;
+            width: 17.5%;
+            background: #d9d9d9;
+            color: #555;
+            float: right;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 0;
+            /* position: absolute; 
+        }*/
+        #todomain{
+            cursor: pointer;
+            float: left;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 95%;
+            /* box-shadow: 5px 5px 5rem gray; */
+        }
+        #todomain li{
+            cursor: pointer;
+            position: relative;
+            padding: 12px 8px 12px 8px;
+            font-size: 18px;
+            transition: 0.2s;
+            
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .check{
+            transition: 0.3s;
+            text-decoration: line-through;
+            color: #E0E0E0;
+        }
+        .close{
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: 0.3s;
+            padding: 20px 16px 12px 16px;
+        }
+        .close:hover{
+            color: #ffffff;
+            background-color: #000000;
+        }
+    </style>
+    <script src="cal.js"></script>
+</head>
+<body>
+    <div class="calspace">
+        <table id="cal">
+            <tr class="nohi">
+                <td id="pnhi" align="center" onclick="precal()"><</td>
+                <td id="calym" align="center" colspan="5"></td>
+                <td id="pnhi" align="center" onclick="nextcal()">></td>
+            </tr>
+            <tr class="nohi">
+                <td align="center">월</td>
+                <td align="center">화</td>
+                <td align="center">수</td>
+                <td align="center">목</td>
+                <td align="center">금</td>
+                <td align="center">토</td>
+                <td align="center">일</td>
+            </tr>
+        </table>
+        <script>
+          makecal();
+        </script>
+    </div>
+    <div class="todo">
+        <input type="text" id="todoinput" placeholder="입력하고 엔터를 눌러주세요!" onkeydown="onEnter()">
+        <ul id="todomain">
+            
+        </ul>
+    </div>
+</body>
+<script src="todo.js"></script>
+</html>
