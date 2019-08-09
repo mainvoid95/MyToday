@@ -1,5 +1,9 @@
 var today = new Date();
 var tagetday = new Date();
+var y = today.getFullYear();
+var m = today.getMonth() + 1;
+var d = today.getDate();
+
 
 function makecal(){
     var firstday = new Date(today.getFullYear(),today.getMonth(),1);
@@ -28,7 +32,15 @@ function makecal(){
         if(cell.innerHTML == tagetday.getDate() 
         && tableym.innerHTML == tagetday.getFullYear()+ " 년 " + (tagetday.getMonth() + 1)+ " 월 "){
             cell.className = "todayhi";
+        }else{
+            cell.className = "dayhi";
         }
+        // cell.addEventListener('click', function(event){
+        //     var diray = document.getElementById('diraydiv');
+        //     if(diray.style.display == "none"){
+        //         diray.style.display = ""
+        //     }
+        // });
         cnt = cnt + 1;
         if (cnt%7 == 0)    //1주=7일
         row = cal.insertRow();
@@ -41,16 +53,28 @@ function makecal(){
             row = cal.insertRow();
         }
     }
-
+    $(".todayhi,.dayhi").click(function(){
+        $("#editback").show(30);
+    })
 }
 
+//달력 표기 월 변경
 function precal(){
     today = new Date(today.getFullYear(), (today.getMonth() - 1), today.getDate());
+    y = today.getFullYear();
+    m = today.getMonth();
+    d = today.getDate();
     makecal();
 }
-
 function nextcal(){
     today = new Date(today.getFullYear(), (today.getMonth() + 1), today.getDate());
+    y = today.getFullYear();
+    m = today.getMonth();
+    d = today.getDate();
     makecal();
 }
 
+
+function writeday(){
+    
+}

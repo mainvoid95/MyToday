@@ -25,7 +25,8 @@ ToDo List를 만든다
 
 
 # 필요 기술
-node.js
-html
-css
-javascript
+서버 : node.js
+
+웹 문서: html css javascript
+
+DB: MySQL
