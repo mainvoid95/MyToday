@@ -1,5 +1,7 @@
+var EventEmiiter = require('events'),EventEmiiter;
 var pretodolist = document.getElementsByTagName("li");
 var j;
+
 for(j = 0; j < pretodolist.length; j++){
     var span = document.createElement("span");
     var xtext = documetn.createTextNode("\u00D7");
@@ -13,7 +15,7 @@ list.addEventListener('click', function(event){
     event.target.classList.toggle("check");
 }, false);
 
-function addItem(){
+function addItem(inputValue){
     var li = document.createElement("li");
     var inputValue = document.getElementById("todoinput").value;
     var t =document.createTextNode(inputValue);

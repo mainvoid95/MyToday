@@ -1,0 +1,22 @@
+{
+  "name": "mytoday",
+  "version": "1.0.0",
+  "description": "일기, 일정 관리 사이트",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mainvoid95/MyToday.git"
+  },
+  "author": "mainvoid95",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mainvoid95/MyToday/issues"
+  },
+  "homepage": "https://github.com/mainvoid95/MyToday#readme",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
+}

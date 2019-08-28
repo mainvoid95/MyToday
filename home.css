@@ -1,0 +1,217 @@
+/* 전체 문서에 적용되는 것들 */
+* {
+	box-sizing:border-box;
+	font-family:'Noto Sans KR',sans-serif;
+}
+*::-webkit-scrollbar {
+	display:none;
+}
+*:focus {
+	outline:none;
+}
+body {
+	background-color:#F5F5F5;
+	color:#000000;
+}
+div {
+	padding:10px;
+}
+.calspace {
+	width:auto;
+	height:auto;
+	position:absolute;
+	background-color:#FF8A65;
+	top:0px;
+	right:0px;
+	bottom:0px;
+	left:0px;
+	margin-right:40%;
+	overflow:auto;
+	padding:10px;
+}
+.todo {
+	position:absolute;
+	top:0;
+	right:0;
+	width:40%;
+	height:100%;
+	background-color:#FFF8E1;
+}
+#cal {
+	background-color:#FF8A65;
+	width:97%;
+	height:100%;
+	position:absolute;
+	background-color:#FF8A65;
+	top:0px;
+	right:0px;
+	bottom:0px;
+	left:0px;
+	margin-right:250px;
+	overflow:auto;
+}
+td {
+	overflow:auto;
+	padding:10px;
+	width:10%;
+	height: 12%;
+}
+/* 현재 표기되는 달력의 년도,월의 스타일 */
+#calym {
+	font-size:25px;
+}
+#calym:hover {
+	background-color: #FF8A65;
+}
+/* 날자일 때 마우스가 포인팅 되었을떄 */
+td:hover {
+	background-color:#D32F2F;
+	transition:0.3s;
+}
+#day {
+	background-color:#FF8A65;
+}
+#day:hover {
+	background-color: #FF8A65;
+}
+/* 오늘 날자 */
+.todayhi {
+	color: #FFF8E1;
+}
+/* 오늘 날자 포인팅 */
+.todayhi:hover {
+	background-color:#D32F2F;
+	transition: 0.3s;
+}
+/* 하이라이트 안되게 하는것들 */
+.nohi {
+	background-color:#FF8A65;
+	font-size: 20px;
+}
+/* 포인팅 됬을때 하이라이트 안되게 하는것들 */
+.nohi:hover {
+	background-color:#FF8A65;
+}
+#pnhi {
+	background: #FF8A65;
+}
+/* 월 변경시 누르게 되는 칸 */
+#pnhi:hover {
+	background-color:#D32F2F;
+	transition: 0.3s;
+}
+/* todolist 입력칸 */
+#todoinput {
+	border:none;
+	border-radius:0;
+	width:95%;
+	padding:10px;
+	float:left;
+	font-size:16px;
+	background-color:#FFCC80;
+}
+#todomain {
+	cursor:pointer;
+	float:left;
+	list-style:none;
+	padding:0;
+	margin:0;
+	width:95%;
+	/* box-shadow:5px 5px 5rem gray;*/
+}
+#todomain li {
+	cursor:pointer;
+	position:relative;
+	padding:12px 8px 12px 8px;
+	font-size:18px;
+	transition:0.2s;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+.check {
+	transition:0.3s;
+	text-decoration:line-through;
+	color:#E0E0E0;
+}
+.close {
+	position:absolute;
+	right:0;
+	top:0;
+	transition:0.3s;
+	padding:20px 16px 12px 16px;
+}
+.close:hover {
+	color:#ffffff;
+	background-color: #000000;
+}
+/* 일기작성 */
+#editback {
+	position:relative;
+	display:none;
+	width:90%;
+	max-width:90%;
+	height:90%;
+	max-height:90%;
+	position:fixed;
+	overflow:auto;
+	top:5%;
+	left:5%;
+	background-color:#EF9A9A;
+	transition: 0.3s;
+}
+#edit {
+	resize:none;
+	width:100%;
+	height:90%;
+	border:none;
+	border-radius:10px;
+	background-color:rgba(255,255,255,0);
+	font-size:20px;
+	/* background-color:#EF9A9A;*/
+	/* color:azure;*/
+}
+#edit:focus {
+	outline:none;
+}
+#bold {
+}
+button {
+	border:none;
+	background-color: rgba(255,255,255,0.5)
+}
+#editexit,#editsave {
+	border:none;
+	width:auto;
+	/* position:relative;*/
+	background-color:rgba(255,255,255,0)
+}
+/* #editexit{position:absolute;right:0px;padding-right: 20px;}*/
+#editexit:hover,#editsave:hover {
+	border:none;
+	transition:0.3s;
+	background-color:#ffffff;
+}
+#edittoolbar {
+	display:inline-block;
+	height:60px;
+	width:87%;
+	max-width:90%;
+	background-color:#EF9A9A;
+}
+#editfooter {
+	position:sticky;
+	bottom:0;
+	background-color:#EF9A9A;
+}
+form {
+	width:100%;
+	height:100%;
+}
+.printdate {
+	background-color:#EF9A9A;
+	border:none;
+	font-size:20px;
+	width: 100px;
+}
