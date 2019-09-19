@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>오늘 하루</title>
+</head>
+<script>
+    function checkLogInStatus(){
+        var loginbtn = document.querySelector("#gauthloginbtn");
+        var nametext = document.querySelector("#username");
+        var userimg = document.querySelector("#userimg");
+                if(gauth.isSignedIn.get()){
+                    console.log("logined");
+                    loginbtn.value = 'logout';
+                    var userProfile = gauth.currentUser.get().getBasicProfile();
+                    nametext.innerHTML = userProfile.getName();
+                    userimg.src = userProfile.getImageUrl();
+                }else{
+                    console.log("not logined");
+                    loginbtn.value = 'login';
+                    nametext.innerHTML = "로그인이 필요합니다";
+                    userimg.src = '';
+                }
+            }
+    
+    function init(){
+        gapi.load('auth2', function() {
+            //gauth를 이 문서에서 전역변수로 접근하기 위해서 window에 선언함
+            window.gauth = gapi.auth2.init({
+                client_id:'613944640766-859t5kas7hd6psg71i0888qjlp1tbi84.apps.googleusercontent.com'
+            })
+            gauth.then(function(){
+                console.log("gauth succes");
+                checkLogInStatus();
+            },function(){
+                console.log("gauth fail");    
+            })
+        });
+    }
+ 
+
+</script>
+<body>
+    <span id="username"></span>
+    <img id="userimg"src="" alt="">
+    <input type="button" id="gauthloginbtn" value="확인중입니다" onclick="
+        if(this.value === 'login'){
+            //구글 로그인 시도 로그인도중 캘린더 권한 확인후 가져옴
+            gauth.signIn({
+                    scope: 'https://www.googleapis.com/auth/calendar',
+                }).then(function(){
+                checkLogInStatus();
+            });
+        }else{
+            gauth.signOut().then(function(){
+                checkLogInStatus();
+            });
+        }
+        ">
+    <div>
+        
+    </div>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+</body>
+</html>

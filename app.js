@@ -1,11 +1,18 @@
-const express = require('express')
-const app = express()
-const port = 3000
-
+const express = require('express');
+const hostname = "http://herne95.synology.me";
+const app = express();
+const port = 3000;
+const fs = require('fs');
 
 app.get('/', (req, res) =>{
-    res.send("접속 확인 완료");
-    
-})
+    fs.readFile('./html/home.html', (error, data) =>{
+        if(error){
+            console.log(error);
+        }else{
+            res.writeHead(200);
+            res.end(data);
+        }
+    })
+});
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
