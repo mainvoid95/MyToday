@@ -2,7 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <title>오늘 하루</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
 </head>
+<style>
+
+</style>
 <script>
     function checkLogInStatus(){
         var loginbtn = document.querySelector("#gauthloginbtn");
@@ -36,10 +43,38 @@
             })
         });
     }
- 
-
 </script>
+
 <body>
+    <div id="root"></div>
+    <script type="text/babel">
+            //react
+            const e = React.createElement;
+            const gloginbtn = React.createElement;
+        
+            class LikeButton extends React.Component{
+                constructor(props){
+                    super(props);
+                    this.state = {
+                        liked : false,
+                    }
+                }
+                render(){
+                    return <button type='submit' onClick={() => {this.setState({liked : true})}}>{this.state.liked === true ? 'Like' : 'Liked' }</button>
+                    // JSX (JS + XML)
+                    // return e('button', {
+                    //     onClick: () => {this.setState({liked : true})},
+                    //     type : 'submit'
+                    // }, this.state.liked === true ? 'Liked':'Like'); // <button>Like</button>
+                }
+            }
+
+            
+        </script>
+        <script type="text/babel">
+            //reactDom
+            ReactDOM.render(<LikeButton /> , document.querySelector('#root'));
+        </script>
     <span id="username"></span>
     <img id="userimg"src="" alt="">
     <input type="button" id="gauthloginbtn" value="확인중입니다" onclick="

@@ -5,7 +5,7 @@ const port = 3000;
 const fs = require('fs');
 
 app.get('/', (req, res) =>{
-    fs.readFile('./html/home.html', (error, data) =>{
+    fs.readFile('./html/login.html', (error, data) =>{
         if(error){
             console.log(error);
         }else{
@@ -15,4 +15,4 @@ app.get('/', (req, res) =>{
     })
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port);
