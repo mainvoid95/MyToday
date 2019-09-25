@@ -1,55 +1,68 @@
-# MyToday
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-일기를 쓰고싶었다. 근데 맨날 까먹는다. 어디서든 일기를 쓸수있게 만들어볼까....? 해서 만들기 시작했다.
+## Available Scripts
 
-개인프로젝트와 졸업작품을 겸하는 프로젝트입니다.
+In the project directory, you can run:
 
-2019년 8월 9일에 시작된 git 저장소입니다.
+### `npm start`
 
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
+### `npm test`
 
-# 구현할 것
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-구글 로그인으로 로그인 가능
+### `npm run build`
 
-로그인한 계정마다 별개로 저장
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-달력은 오늘을 기준으로 만들어진다
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-만들어진 달력에서 오늘은 따로 표현한다
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-달력의 해당날자를 클릭하면 그날자의 일기를 작성할 수 있다
+### `npm run eject`
 
-일기가 작성된 날자는 배경의 색이 다르게 표현된다
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-작성된 일기는 수정할 수 있다
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-ToDo List를 만든다
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-입력창에 항목을 작성하면 리스트가 작성된다
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-작성된 리스트는 삭제할수 있다
+## Learn More
 
-작성된 리스트는 체크해서 따로 표시 할 수 있다.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
+To learn React, check out the [React documentation](https://reactjs.org/).
 
+### Code Splitting
 
-# 필요 기술
-서버 : node.js
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-웹 문서: html css javascript
+### Analyzing the Bundle Size
 
-DB: MySQL
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
+### Making a Progressive Web App
 
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-# 기록
+### Advanced Configuration
 
-2019.08.09 ~ 2019.09.18
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-html, css로 달력, todo를 만들고 달력 날자를 누르면 그날자의 일기를 작성할 수 있고 저장하면 DB에 저장되는 방식으로 제작
+### Deployment
 
-2019.09.19
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-모두 삭제후 구글 로그인 기능구현
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
