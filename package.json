@@ -1,0 +1,27 @@
+{
+  "name": "mytoday",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "front" : "cd front && npm start",
+    "dev" : "concurrently \"npm run server\" \"npm run front\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server" : "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mainvoid95/MyToday.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mainvoid95/MyToday/issues"
+  },
+  "homepage": "https://github.com/mainvoid95/MyToday#readme",
+  "dependencies": {
+    "concurrently": "^4.1.2",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.3"
+  }
+}
