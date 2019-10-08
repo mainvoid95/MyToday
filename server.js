@@ -15,7 +15,8 @@ const upload = multer({dest: './upload'})
 
 
 
-
+//데이터 베이스와 연결
+//서버, 계정정보는 별도 파일에 보관 git에 업로드 되지 않음
 const db = mysql.createConnection({
     host: dbconf.host,
     user: dbconf.user,
@@ -24,6 +25,7 @@ const db = mysql.createConnection({
 })
 db.connect();
 
+//url을 get으로 호출시 유저 테이블을 불러오는 쿼리 동작
 app.get('/api/users', (req, res) => {
     db.query(
         'SELECT * FROM user',
@@ -33,8 +35,8 @@ app.get('/api/users', (req, res) => {
     )
 });
 
-app.post('/api/users', (req, res) =>{
-    console.log(req.body);
+///api/users post동작 
+app.post('/api/usersRegister', (req, res) =>{
     let sql = 'INSERT INTO USER(user_id, user_pass, user_email, user_name) VALUES(?,?,?,?)';
     let id = req.body.id;
     let pass = req.body.password;
@@ -46,34 +48,18 @@ app.post('/api/users', (req, res) =>{
     })
 })
 
-app.get('/api/hello', (req, res) => {
-    res.send({message: "hello express"});
-});
+app.post('/api/login', (req, res) =>{
+    let sql = `SELECT ?, ? FROM USER WHERE user_id = '?' `;
+    let id = req.body.id;
+    let pass = req.body.id;
+    let params = [id, pass, id];
+    db.query(sql,params,(err, rows, fields)=>{
+        console.log(rows);
+        res.send(rows);
+    })
+})
 
-app.get('/api/users', (req, res) =>{
-    res.send(
-        [
-            {
-            'id':'test',
-            'password':'testtest',
-            'email':'test@test.email',
-            'name':'이름'
-            },
-            {
-              'id':'test',
-              'password':'testtest',
-              'email':'test@test.email',
-              'name':'이름'
-              },
-              {
-                'id':'test',
-                'password':'testtest',
-                'email':'test@test.email',
-                'name':'이름'
-                },
-          ]
-    );
-});
+app.post('/api/diray')
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

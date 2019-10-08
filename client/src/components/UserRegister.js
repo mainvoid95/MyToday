@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {post} from 'axios'
+import {post} from 'axios' 
+
 
 class UserRegister extends Component{
     constructor(props){
@@ -11,16 +12,20 @@ class UserRegister extends Component{
             email:'',
             name:'',
             pass_same:false,
+            open:false,
         }
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
         this.handleValueChange = this.handleValueChange.bind(this)
         this.addUser = this.addUser.bind(this)
+        this.handleClickOpen = this.handleClickOpen.bind(this)
+        this.handleClose = this.handleClose.bind(this)
     }
 
     handleFormSubmit(e){
         e.preventDefault()
         this.addUser().then((response)=>{
-            console.log(response.data);
+            this.props.stateRefresh();
+
         })
         this.setState({
             id:'',
@@ -28,14 +33,33 @@ class UserRegister extends Component{
             pass_confirm:'',
             email:'',
             name:'',
+            pass_same:false,
+            open:false,
         })
-        window.location.reload();
     }
 
     handleValueChange(e) {
         let nextState = {};
         nextState[e.target.name] = e.target.value;
         this.setState(nextState);
+    }
+
+    handleClickOpen(){
+        this.setState({
+            open:true
+        });
+    }
+
+    handleClose(){
+        this.setState({
+            id:'',
+            pass:'',
+            pass_confirm:'',
+            email:'',
+            name:'',
+            pass_same:false,
+            open:false,
+        })
     }
     
     addUser(){
@@ -48,7 +72,7 @@ class UserRegister extends Component{
         if(this.state.pass_same){
  
         }
-        return post('api/users', {
+        return post('api/usersRegister', {
             id: this.state.id,
             password: this.state.pass,
             email : this.state.email,

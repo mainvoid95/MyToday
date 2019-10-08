@@ -1,75 +1,89 @@
 import React from 'react';
+import { Link, Redirect, Route, BrowserRouter as Router } from "react-router-dom";
 import './App.css';
-import Paper from '@material-ui/core/Paper';
 import Users from './components/Users';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import {withStyles} from '@material-ui/core/styles';
-import UserRegister from './components/UserRegister';
-
-const styles = theme =>({
-  root:{
-    width:'100%',
-    marginTop: theme.spacing(3),
-    overflowX:"auto"
-  },
-  table:{
-    minWidth: 500,
-  },
-  progress:{
-    margin:theme.spacing(2)
-  }
-});
+import Home from './components/Home';
+import UsersRegister from './components/UserRegister';
+import Login from './components/Login';
+import TopBar from './components/TopBar';
 
 
 class App extends React.Component{
-  state ={
-    users:'',
-    completed: 0
+  constructor(props){
+    super(props);
+    this.state ={
+      mode:'main',
+      refreshPage : false,
+    }
+    this.stateRefresh = this.stateRefresh.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this)
+  }
+
+  stateRefresh(){
+    this.setState({
+      refreshPage: true,
+    })
   }
 
   componentDidMount(){
     this.callApi().then(res => this.setState({users: res})).catch(err => console.log(err));
   }
 
+  //유저정보 가져오는 api 호출
   callApi = async () => {
     const response = await fetch('/api/users');
     const body = await response.json();
     return body;
   }
-
+  
+  contentSelector() {
+    
+  }
     
   render(){
-    const {classes} = this.props;
+    if(this.state.refreshPage === true){
+      this.setState({
+        refreshPage:false,
+      })
+      return (
+        <Redirect to="/"/>
+      )
+    }
     return(
       <div>
-        <Paper className={classes.root}>
-          <Table className={classes.table}>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>아이디</TableCell>
-                        <TableCell>비밀번호</TableCell>
-                        <TableCell>이메일</TableCell>
-                        <TableCell>이름</TableCell>
-                    </TableRow>
-                </TableHead>
-                  <TableBody>
-                    {this.state.users ? this.state.users.map(u => {
-                      return <Users id={u.user_id} pass={u.user_pass} email={u.user_email} name={u.user_name} />
-                      }) : ''}
-                  </TableBody>
-              </Table>
-          </Paper>
-        <UserRegister />
+          <Router>
+            <header>
+                <ul>
+                  <li>
+                    <Link to="/">
+                      홈
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/login">
+                      로그인
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/userRegister">
+                        회원가입
+                    </Link>
+                  </li>
+
+                </ul>
+            
+            </header>
+            <main>
+              <Route exact path="/" component={Home} />
+              <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
+              <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
+            </main>
+          </Router>
       </div>
     )
-    
   }
 }
 
 
-export default withStyles(styles)(App);
+export default App;
 
