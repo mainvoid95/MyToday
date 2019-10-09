@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const fs = require('fs');
 const mysql = require('mysql');
-const bcrypt = require('bcrypt'); 
+const bcrypt = require('bcrypt'); //암호화 모듈
 const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
