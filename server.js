@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const fs = require('fs');
 const mysql = require('mysql');
+const bcrypt = require('bcrypt'); 
 const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,24 +40,41 @@ app.get('/api/users', (req, res) => {
 app.post('/api/usersRegister', (req, res) =>{
     let sql = 'INSERT INTO USER(user_id, user_pass, user_email, user_name) VALUES(?,?,?,?)';
     let id = req.body.id;
-    let pass = req.body.password;
     let email = req.body.email;
     let name = req.body.name;
-    let params = [id, pass, email, name];
-    db.query(sql, params, (err,rows,fields)=>{
-        res.send(rows);
-    })
+    bcrypt.hash(req.body.password, 10, function(err, hash){
+        var pass = hash;
+        let params = [id, pass, email, name];
+        db.query(sql, params, (err,rows,fields)=>{
+            if(err) throw err;
+            res.send(rows);
+        })
+    });
+
+    
+
 })
 
 app.post('/api/login', (req, res) =>{
-    let sql = `SELECT ?, ? FROM USER WHERE user_id = '?' `;
+    let sql = `SELECT user_pass FROM user WHERE user_id = ? `;
     let id = req.body.id;
     let pass = req.body.id;
-    let params = [id, pass, id];
-    db.query(sql,params,(err, rows, fields)=>{
-        console.log(rows);
-        res.send(rows);
-    })
+    let params = [id];
+    db.query(sql,params,(err, result, fields)=>{
+        if(err) throw err;
+        let dbpass = result[0].user_pass;
+        
+        bcrypt.compare(pass, dbpass, function(err, result){
+            if(result){
+                console.log('비밀번호 일치');
+            }else{
+                console.log('비밀번호 비일치');
+            }
+        });    
+
+    });
+    
+    
 })
 
 app.post('/api/diray')
