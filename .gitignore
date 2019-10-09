@@ -4,14 +4,19 @@
 /node_modules
 /.pnp
 .pnp.js
-database.json
-jws.js
+
 
 # testing
 /coverage
 
 # production
 /build
+
+#중요한 데이터
+database.json
+session.json
+/sessions
+
 
 # misc
 .DS_Store

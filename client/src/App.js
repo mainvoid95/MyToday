@@ -69,9 +69,7 @@ class App extends React.Component{
                         회원가입
                     </Link>
                   </li>
-
                 </ul>
-            
             </header>
             <main>
               <Route exact path="/" component={Home} />
