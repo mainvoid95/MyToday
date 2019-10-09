@@ -6,4 +6,6 @@ CREATE TABLE user (
     `user_email`   VARCHAR(45)  NOT NULL    ,      
     `user_pass`    VARCHAR(255)    NOT NULL        ,      
     `user_name`    VARCHAR(45)    NULL        ,      
-    PRIMARY KEY (user_number) );
+    PRIMARY KEY (user_number),
+    UNIQUE INDEX (user_id)
+    );
