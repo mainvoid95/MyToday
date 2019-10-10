@@ -4,6 +4,7 @@ const app = express();
 const fs = require('fs');
 const mysql = require('mysql'); // mysql 모듈
 const bcrypt = require('bcrypt'); //암호화 모듈
+const saltRounds = 10; //암호화 solt값 설정
 const session = require('express-session'); //세션 미들웨어
 const sessionFileStore = require('session-file-store')(session);
 const port = process.env.PORT || 5000;
@@ -16,7 +17,8 @@ const sessionDataJson = fs.readFileSync('./session.json'); //세션 데이터
 const sessionSecret = JSON.parse(sessionDataJson); //세션 데이터에는 시크릿키가 들어있음
 
 const multer = require('multer');
-const upload = multer({dest: './upload'})
+const upload = multer({dest: './upload'});
+
 
 //세션 사용
 app.use(session({
@@ -39,46 +41,59 @@ db.connect();
 
 
 
-//url을 get으로 호출시 유저 테이블을 불러오는 쿼리 동작
-app.get('/api/users', (req, res) => {
-    db.query(
-        'SELECT * FROM user',
-        (err,rows,fields) =>{
-            res.send(rows);
-        }
-    )
+//세션데이터를 react로 보내기위한 get동작
+app.get('/api/getSession', (req, res) => {
+    if(req.session.is_logined){
+        var jsonstring = JSON.stringify(
+            {
+                "is_logined":req.session.is_logined,
+                "user_number":req.session.user_number,
+                "user_id" : req.session.user_id,
+                "user_name": req.session.user_name,
+            }
+        )
+    }
+    res.send(jsonstring);
 });
 
-///api/users post동작 
+//회원가입 post동작 
 app.post('/api/usersRegister', (req, res) =>{
+    let input = req.body;
+    console.log(input);
     let sql = 'INSERT INTO USER(user_id, user_pass, user_email, user_name) VALUES(?,?,?,?)';
-    let id = req.body.id;
-    let email = req.body.email;
-    let name = req.body.name;
+    let id = input.id;
+    let email = input.email;
+    let name = input.name;
+    let pass = input.password;
+    console.log(id, email,name, pass);
     //비밀번호는 암호화해서 db에 저장함
-    bcrypt.hash(req.body.password, 10, function(err, hash){
-        var pass = hash;
+    bcrypt.hash(pass, saltRounds, function(err, hash){
+        console.log(hash);
+        let pass = hash;
         let params = [id, pass, email, name];
         db.query(sql, params, (err,rows,fields)=>{
             //동일한 아이디로 중복 생성시 에러처리
-            if(err.code === 'ER_DUP_ENTRY'){
-                console.log('아이디 중복 생성');
+            if(err){
+                if(err.code === 'ER_DUP_ENTRY'){
+                    console.log('아이디 중복 생성');
+                }
+            }else{
+                res.send(rows);
             }
-            res.send(rows);
         })
     });
 })
 
 //로그인 api
 app.post('/api/login', (req, res) =>{
+    let input = req.body;
     let sql = `SELECT * FROM user WHERE user_id = ? `;
-    let id = req.body.id;
-    let pass = req.body.id;
+    let id = input.id;
+    let pass = input.password;
+    console.log(id, pass)
     let params = [id];
     db.query(sql,params,(err, dbresult, fields)=>{
-        console.log(dbresult[0]);
         let dbpass = dbresult[0].user_pass;
-        //db의 저장된 암호화된 비밀번호와 비교하는 함수
         bcrypt.compare(pass, dbpass, function(err, result){
             if(result){
                 console.log('비밀번호 일치');
@@ -91,12 +106,20 @@ app.post('/api/login', (req, res) =>{
             }else{
                 console.log('비밀번호 비일치');
             }
-        });    
-
+        }); 
+        
     });
-    
-    
 })
+
+app.get('/api/logout', (req, res)=>{
+    req.session.destroy(function(err){
+        if (err) {
+          console.error(err);
+        } else {
+          res.redirect('/');
+        }
+    })
+});
 
 app.post('/api/diray')
 

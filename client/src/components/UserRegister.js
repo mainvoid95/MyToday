@@ -69,12 +69,9 @@ class UserRegister extends Component{
         }else{
             this.setState({pass_same : true});
         }
-        if(this.state.pass_same){
- 
-        }
-        return post('api/usersRegister', {
+        return post('/api/usersRegister', {
             id: this.state.id,
-            password: this.state.pass,
+            password: String(this.state.pass),
             email : this.state.email,
             name : this.state.name
         }).then((response) =>{

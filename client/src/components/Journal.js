@@ -6,9 +6,7 @@ class Login extends Component{
     constructor(props){
         super(props);
         this.state ={
-            id:'',
-            pass:'',
-            open:false,
+             
         }
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
         this.handleValueChange = this.handleValueChange.bind(this)
@@ -18,13 +16,12 @@ class Login extends Component{
     handleFormSubmit(e){
         e.preventDefault()
         this.loginProcess().then((response)=>{
-            console.log('Login');
-            console.log(response);
             this.props.stateRefresh();
         })
         this.setState({
             id:'',
             pass:'',
+            pass_same:false,
             open:false,
         })
     }
