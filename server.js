@@ -16,9 +16,6 @@ const dbconf = JSON.parse(dbdata); //파일에서 정보 불러옴
 const sessionDataJson = fs.readFileSync('./session.json'); //세션 데이터
 const sessionSecret = JSON.parse(sessionDataJson); //세션 데이터에는 시크릿키가 들어있음
 
-const multer = require('multer');
-const upload = multer({dest: './upload'});
-
 
 //세션 사용
 app.use(session({
@@ -59,13 +56,11 @@ app.get('/api/getSession', (req, res) => {
 //회원가입 post동작 
 app.post('/api/usersRegister', (req, res) =>{
     let input = req.body;
-    console.log(input);
     let sql = 'INSERT INTO user(user_id, user_pass, user_email, user_name) VALUES(?,?,?,?)';
     let id = input.id;
     let email = input.email;
     let name = input.name;
     let pass = input.password;
-    console.log(id, email,name, pass);
     //비밀번호는 암호화해서 db에 저장함
     bcrypt.hash(pass, saltRounds, function(err, hash){
         console.log(hash);
@@ -130,19 +125,20 @@ app.post('/api/journalSaveProcess', (req, res)=>{
     if(req.session.user_number === user_number){
         db.query(sql, params, (err, dbresult, fields) => {
             console.log(dbresult);
-            res.send('/api/journallist');
+            res.send('');
         })
     }
 });
 
 app.get('/api/journallist', (req, res) =>{
     let sql = `SELECT journal_create_date, journal_fix_date, journal_content FROM journal WHERE user_number = ?`;
-    if(req.session.user_number === user_number){
+    
+    // if(req.session.user_number === user_number){
         db.query(sql, params, (err, dbresult, fields) => {
             console.log(dbresult);
             res.send(dbresult);
         })
-    }
+    // }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

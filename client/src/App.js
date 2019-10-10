@@ -12,7 +12,7 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state ={
-      mode:'main',
+      mode:'home',
       refreshPage : false,
       is_logined: false,
       user_id:'',
@@ -25,9 +25,9 @@ class App extends React.Component{
     this.changeUserState = this.changeUserState.bind(this);
   }
 
-  stateRefresh(){
+  stateRefresh(e){
     this.setState({
-      mode:'main',
+      mode: e,
       refreshPage : false,
       is_logined: false,
       user_id:'',
@@ -81,8 +81,8 @@ class App extends React.Component{
       <ul>
         <li><Link to="/">홈</Link></li>
         <li><Link to="/logout">로그아웃</Link></li>
-        <li><Link to="/Journal">일기</Link></li>
-        <li><Link to='/JournalList'>기록</Link></li>
+        <li><Link to="/journal">일기</Link></li>
+        <li><Link to='/journalist'>기록</Link></li>
       </ul>
       )
     }else{
@@ -103,9 +103,16 @@ class App extends React.Component{
       this.setState({
         refreshPage:false,
       })
-      return (
-        <Redirect to="/"/>
-      )
+      if(this.state.mode === 'journaledit'){
+        return (
+          <Redirect to="/journalist"/>
+        )
+      }else{
+        return (
+          <Redirect to="/"/>
+        )
+      }
+
     }
     return(
       <div>
@@ -122,8 +129,8 @@ class App extends React.Component{
                 <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
                 <Route path='/logout' component={() =><Logout stateRefresh={this.stateRefresh} />}/>
                 <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
-                <Route path="/Journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
-                <Route path="/JournalList" component={()=> <JouranlList />}/>
+                <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
+                <Route path="/journalist" component={()=> <JouranlList />}/>
               </Switch>
              </main>
           </Router>

@@ -9,7 +9,7 @@ class Journal extends Component{
     constructor(props){
         super(props);
         this.state ={
-            text:'', 
+            text:''
             }
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleValueChange = this.handleValueChange.bind(this);
@@ -20,7 +20,7 @@ class Journal extends Component{
     handleFormSubmit(e){
         e.preventDefault();
         this.journalSaveProcess().then((response)=>{
-            this.props.stateRefresh();
+            this.props.stateRefresh('journaledit');
         });
     }
 
@@ -31,12 +31,14 @@ class Journal extends Component{
     }
     
     journalSaveProcess(){
-        return post('/api/journalSaveProcess', {
-            user_number: this.props.user_number,
-            text: this.state.text
-        }).then((response) =>{
-            console.log(response);
-        })
+        return (
+            post('/api/journalSaveProcess', {
+                user_number: this.props.user_number,
+                text: this.state.text
+            }).then((response) =>{
+                console.log(response);
+            })
+        )
     }
 
     render(){

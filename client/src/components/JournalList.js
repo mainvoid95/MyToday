@@ -1,19 +1,15 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 
 
 class JournalList extends Component{
     constructor(props){
-        this.state(
-            
-        )
+        super(props);
     }
     render(){
         return(
             <div>
-                <p>{this.props.id}</p>
-                <p>{this.props.password}</p>
-                <p>{this.props.email}</p>
-                <p>{this.props.name}</p>
+                리스트 출력 
             </div>
         )
     }
