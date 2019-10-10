@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 
 
-class Users extends Component{
+class JournalList extends Component{
+    constructor(props){
+        this.state(
+            
+        )
+    }
     render(){
         return(
             <div>
@@ -14,4 +19,4 @@ class Users extends Component{
     }
 }
 
-export default Users;
+export default JournalList;

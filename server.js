@@ -60,7 +60,7 @@ app.get('/api/getSession', (req, res) => {
 app.post('/api/usersRegister', (req, res) =>{
     let input = req.body;
     console.log(input);
-    let sql = 'INSERT INTO USER(user_id, user_pass, user_email, user_name) VALUES(?,?,?,?)';
+    let sql = 'INSERT INTO user(user_id, user_pass, user_email, user_name) VALUES(?,?,?,?)';
     let id = input.id;
     let email = input.email;
     let name = input.name;
@@ -121,7 +121,29 @@ app.get('/api/logout', (req, res)=>{
     })
 });
 
-app.post('/api/diray')
+app.post('/api/journalSaveProcess', (req, res)=>{
+    let text = req.body.text;
+    let user_number = req.body.user_number;
+    console.log(user_number, text);
+    let sql = `INSERT INTO journal (user_number, journal_content) VALUE(?,?)`;
+    let params = [user_number, text];
+    if(req.session.user_number === user_number){
+        db.query(sql, params, (err, dbresult, fields) => {
+            console.log(dbresult);
+            res.send('/api/journallist');
+        })
+    }
+});
+
+app.get('/api/journallist', (req, res) =>{
+    let sql = `SELECT journal_create_date, journal_fix_date, journal_content FROM journal WHERE user_number = ?`;
+    if(req.session.user_number === user_number){
+        db.query(sql, params, (err, dbresult, fields) => {
+            console.log(dbresult);
+            res.send(dbresult);
+        })
+    }
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 

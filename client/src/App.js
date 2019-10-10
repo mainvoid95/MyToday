@@ -5,6 +5,8 @@ import Home from './components/Home';
 import UsersRegister from './components/UserRegister';
 import Login from './components/Login';
 import Logout from './components/Logout';
+import Jouranl from './components/Journal';
+import JouranlList from './components/JournalList';
 
 class App extends React.Component{
   constructor(props){
@@ -71,6 +73,30 @@ class App extends React.Component{
     return body;
   }
 
+  //네비게이터 
+  loginedNav(){
+    let nav = null;
+    if(this.state.is_logined === true){
+      nav = ( 
+      <ul>
+        <li><Link to="/">홈</Link></li>
+        <li><Link to="/logout">로그아웃</Link></li>
+        <li><Link to="/Journal">일기</Link></li>
+        <li><Link to='/JournalList'>기록</Link></li>
+      </ul>
+      )
+    }else{
+      nav =(
+        <ul>
+          <li><Link to="/">홈</Link></li>
+          <li><Link to="/login">로그인</Link></li>
+          <li><Link to="/userRegister">회원가입</Link></li>
+      </ul>
+      )
+    }
+    return nav
+  }
+
     
   render(){
     if(this.state.refreshPage === true){
@@ -87,23 +113,8 @@ class App extends React.Component{
             <header>
               <a>유저 번호 : {this.state.user_number} </a><br/>
               <a>유저 아이디 : {this.state.user_id} </a> <br/>
-              <a>유저 이름 : {this.state.user_name} </a><br/>
-                <ul>
-                  <li>
-                    <Link to="/">
-                      홈
-                    </Link>
-                  </li>
-                  <li>
-                   {this.state.is_logined ? (<Link to="/logout">로그아웃</Link>): <Link to="/login">로그인</Link>}
-                  </li>
-                  {this.state.is_logined ? '' : (<li>
-                    <Link to="/userRegister">
-                        회원가입
-                    </Link>
-                  </li>)}
-                  
-                </ul>
+              <a>유저 이름 : {this.state.user_name} </a><br/>      
+                 {this.loginedNav()}
             </header>
             <main>
               <Switch>
@@ -111,6 +122,8 @@ class App extends React.Component{
                 <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
                 <Route path='/logout' component={() =><Logout stateRefresh={this.stateRefresh} />}/>
                 <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
+                <Route path="/Journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
+                <Route path="/JournalList" component={()=> <JouranlList />}/>
               </Switch>
              </main>
           </Router>

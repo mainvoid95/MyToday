@@ -1,41 +1,39 @@
 import React, {Component} from 'react';
 import {post} from 'axios'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; 
 
 
-class Login extends Component{
+
+class Journal extends Component{
     constructor(props){
         super(props);
         this.state ={
-             
-        }
-        this.handleFormSubmit = this.handleFormSubmit.bind(this)
-        this.handleValueChange = this.handleValueChange.bind(this)
-        this.loginProcess = this.loginProcess.bind(this)
+            text:'', 
+            }
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleValueChange = this.handleValueChange.bind(this);
+        this.journalSaveProcess = this.journalSaveProcess.bind(this);
     }
 
+
     handleFormSubmit(e){
-        e.preventDefault()
-        this.loginProcess().then((response)=>{
+        e.preventDefault();
+        this.journalSaveProcess().then((response)=>{
             this.props.stateRefresh();
-        })
-        this.setState({
-            id:'',
-            pass:'',
-            pass_same:false,
-            open:false,
-        })
+        });
     }
 
     handleValueChange(e) {
-        let nextState = {};
-        nextState[e.target.name] = e.target.value;
-        this.setState(nextState);
+        this.setState({
+            text:e,
+        });
     }
     
-    loginProcess(){
-        return post('/api/login', {
-            id: this.state.id,
-            password: this.state.pass,
+    journalSaveProcess(){
+        return post('/api/journalSaveProcess', {
+            user_number: this.props.user_number,
+            text: this.state.text
         }).then((response) =>{
             console.log(response);
         })
@@ -43,15 +41,13 @@ class Login extends Component{
 
     render(){
         return(
-            <div className='Login'>
+            <div className='Journal'>
                 <form onSubmit={this.handleFormSubmit}>
-                    <h1>로그인</h1>
-                    <input type="text" name='id' placeholder='id' value={this.state.id} onChange={this.handleValueChange}></input><br></br>
-                    <input type="password" name='pass' placeholder='password' value={this.state.pass} onChange={this.handleValueChange}></input> <br></br>
-                    <button type="submit">Login</button>
+                    <ReactQuill theme="snow" value={this.state.text} onChange={this.handleValueChange} />
+                    <button type="submit">저장하기</button>
                 </form>
             </div>
         )
     }
 }
-export default Login
+export default Journal
