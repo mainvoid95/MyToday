@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios' 
+import '../App.css';
 
 
 class UserRegister extends Component{
@@ -84,11 +85,11 @@ class UserRegister extends Component{
             <div className='RegisterForm'>
                 <form onSubmit={this.handleFormSubmit}>
                     <h1>회원가입</h1>
-                    <input type="text" name='id' placeholder='id' value={this.state.id} onChange={this.handleValueChange}></input>
-                    <input type="password" name='pass' placeholder='password' value={this.state.pass} onChange={this.handleValueChange}></input>
-                    <input type="password" name='pass_confirm' placeholder='confirm your password' value={this.state.pass_confirm} onChange={this.handleValueChange}></input>
-                    <input type="email" name='email' placeholder='email' value={this.state.email}  onChange={this.handleValueChange}></input>
-                    <input type="text" name='name' placeholder='name' value={this.state.name} onChange={this.handleValueChange}></input>
+                    <input type="text" name='id' placeholder='id' value={this.state.id} onChange={this.handleValueChange}></input><br/>
+                    <input type="password" name='pass' placeholder='password' value={this.state.pass} onChange={this.handleValueChange}></input><br/>
+                    <input type="password" name='pass_confirm' placeholder='confirm your password' value={this.state.pass_confirm} onChange={this.handleValueChange}></input><br/>
+                    <input type="email" name='email' placeholder='email' value={this.state.email}  onChange={this.handleValueChange}></input><br/>
+                    <input type="text" name='name' placeholder='name' value={this.state.name} onChange={this.handleValueChange}></input><br/>
                     <button type="submit">가입하기</button>
                 </form>
             </div>

@@ -7,15 +7,16 @@ const bcrypt = require('bcrypt'); //암호화 모듈
 const saltRounds = 10; //암호화 solt값 설정
 const session = require('express-session'); //세션 미들웨어
 const sessionFileStore = require('session-file-store')(session);
-const port = process.env.PORT || 5000;
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 const dbdata = fs.readFileSync('./database.json'); //데이터 베이스 관련 저장된 파일
 const dbconf = JSON.parse(dbdata); //파일에서 정보 불러옴
 const sessionDataJson = fs.readFileSync('./session.json'); //세션 데이터
 const sessionSecret = JSON.parse(sessionDataJson); //세션 데이터에는 시크릿키가 들어있음
 
+const port = process.env.PORT || 5000;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //세션 사용
 app.use(session({
@@ -130,15 +131,15 @@ app.post('/api/journalSaveProcess', (req, res)=>{
     }
 });
 
-app.get('/api/journallist', (req, res) =>{
-    let sql = `SELECT journal_create_date, journal_fix_date, journal_content FROM journal WHERE user_number = ?`;
+app.get('/api/journalview', (req, res) =>{
+    let sql = `SELECT journal_num, journal_create_date, journal_fix_date, journal_content FROM journal WHERE user_number = ? ORDER BY journal_num DESC `;
+    let user_number = req.session.user_number
+    let params = [user_number];
+    db.query(sql, params, (err, dbresult, fields) => {
+        console.log(dbresult);
+        res.send(dbresult);
+    })
     
-    // if(req.session.user_number === user_number){
-        db.query(sql, params, (err, dbresult, fields) => {
-            console.log(dbresult);
-            res.send(dbresult);
-        })
-    // }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

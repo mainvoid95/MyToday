@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios'
+import '../App.css';
 
 
 class Login extends Component{
@@ -18,9 +19,7 @@ class Login extends Component{
     handleFormSubmit(e){
         e.preventDefault()
         this.loginProcess().then((response)=>{
-            console.log('Login');
-            console.log(response);
-            this.props.stateRefresh();
+            this.props.stateRefresh('home');
         })
         this.setState({
             id:'',
@@ -46,7 +45,7 @@ class Login extends Component{
 
     render(){
         return(
-            <div className='Login'>
+            <div className='LoginForm'>
                 <form onSubmit={this.handleFormSubmit}>
                     <h1>로그인</h1>
                     <input type="text" name='id' placeholder='id' value={this.state.id} onChange={this.handleValueChange}></input><br></br>

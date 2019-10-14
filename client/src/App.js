@@ -6,7 +6,7 @@ import UsersRegister from './components/UserRegister';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Jouranl from './components/Journal';
-import JouranlList from './components/JournalList';
+import JouranlView from './components/JournalView';
 
 class App extends React.Component{
   constructor(props){
@@ -78,20 +78,20 @@ class App extends React.Component{
     let nav = null;
     if(this.state.is_logined === true){
       nav = ( 
-      <ul>
-        <li><Link to="/">홈</Link></li>
-        <li><Link to="/logout">로그아웃</Link></li>
-        <li><Link to="/journal">일기</Link></li>
-        <li><Link to='/journalist'>기록</Link></li>
-      </ul>
+      <div className='nav'>
+        <a><Link to="/">홈</Link></a>
+        <a><Link to="/journal">일기</Link></a>
+        <a><Link to='/jouranlview'>기록</Link></a>
+        <a className='logout' ><Link to="/logout">{this.state.user_name}</Link></a><br/> 
+      </div>
       )
     }else{
       nav =(
-        <ul>
-          <li><Link to="/">홈</Link></li>
-          <li><Link to="/login">로그인</Link></li>
-          <li><Link to="/userRegister">회원가입</Link></li>
-      </ul>
+        <div className='nav'>
+          <a><Link to="/">홈</Link></a>
+          <a className='register'><Link to="/userRegister">회원가입</Link></a>
+          <a className='login' ><Link to="/login">로그인</Link></a>
+        </div>
       )
     }
     return nav
@@ -105,7 +105,7 @@ class App extends React.Component{
       })
       if(this.state.mode === 'journaledit'){
         return (
-          <Redirect to="/journalist"/>
+          <Redirect to="/jouranlview"/>
         )
       }else{
         return (
@@ -118,19 +118,16 @@ class App extends React.Component{
       <div>
           <Router>
             <header>
-              <a>유저 번호 : {this.state.user_number} </a><br/>
-              <a>유저 아이디 : {this.state.user_id} </a> <br/>
-              <a>유저 이름 : {this.state.user_name} </a><br/>      
-                 {this.loginedNav()}
+              {this.loginedNav()}
             </header>
-            <main>
+            <main className='main'>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
                 <Route path='/logout' component={() =><Logout stateRefresh={this.stateRefresh} />}/>
                 <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
                 <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
-                <Route path="/journalist" component={()=> <JouranlList />}/>
+                <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number} />}/>
               </Switch>
              </main>
           </Router>

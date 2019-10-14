@@ -7,7 +7,7 @@ class Logout extends React.Component{
     componentDidMount(){
         get('/api/logout').then((response)=>{
             console.log(response);
-            this.props.stateRefresh();
+            this.props.stateRefresh('home');
         }).catch((err)=>{
             console.log(err)
         });
