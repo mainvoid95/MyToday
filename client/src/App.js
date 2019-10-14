@@ -103,15 +103,15 @@ class App extends React.Component{
       this.setState({
         refreshPage:false,
       })
-      if(this.state.mode === 'journaledit'){
-        return (
-          <Redirect to="/jouranlview"/>
-        )
-      }else{
+      // if(this.state.mode === 'journaledit'){
+      //   return (
+      //     <Redirect to="/jouranlview"/>
+      //   )
+      // }else{
         return (
           <Redirect to="/"/>
         )
-      }
+      // }
 
     }
     return(

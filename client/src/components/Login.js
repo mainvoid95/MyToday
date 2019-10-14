@@ -48,7 +48,9 @@ class Login extends Component{
             <div className='LoginForm'>
                 <form onSubmit={this.handleFormSubmit}>
                     <h1>로그인</h1>
+                    <p>아이디</p>
                     <input type="text" name='id' placeholder='id' value={this.state.id} onChange={this.handleValueChange}></input><br></br>
+                    <p>비밀번호</p>
                     <input type="password" name='pass' placeholder='password' value={this.state.pass} onChange={this.handleValueChange}></input> <br></br>
                     <button type="submit">Login</button>
                 </form>

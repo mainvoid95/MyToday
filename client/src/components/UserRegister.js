@@ -85,10 +85,15 @@ class UserRegister extends Component{
             <div className='RegisterForm'>
                 <form onSubmit={this.handleFormSubmit}>
                     <h1>회원가입</h1>
+                    <p>아이디</p>
                     <input type="text" name='id' placeholder='id' value={this.state.id} onChange={this.handleValueChange}></input><br/>
+                    <p>비밀번호</p>
                     <input type="password" name='pass' placeholder='password' value={this.state.pass} onChange={this.handleValueChange}></input><br/>
+                    <p>비밀번호 확인</p>
                     <input type="password" name='pass_confirm' placeholder='confirm your password' value={this.state.pass_confirm} onChange={this.handleValueChange}></input><br/>
+                    <p>이메일</p>
                     <input type="email" name='email' placeholder='email' value={this.state.email}  onChange={this.handleValueChange}></input><br/>
+                    <p>이름</p>
                     <input type="text" name='name' placeholder='name' value={this.state.name} onChange={this.handleValueChange}></input><br/>
                     <button type="submit">가입하기</button>
                 </form>

@@ -17,6 +17,7 @@
 }
 
 .nav{
+  color: black;
   margin-top: 30px;
   margin-left: 10px;
 }
@@ -37,7 +38,6 @@
   text-decoration: none !important;
 }
 
-
 .login{
   float: right;
 }
@@ -54,6 +54,10 @@
   margin-left: 0px;
 }
 
+p{
+  margin:0px;
+}
+
 .JournalViewBox{
   margin-bottom: 30px;
   padding: 10px;
@@ -64,14 +68,14 @@
 }
 
 .JournalViewBoxDate{
-  position: absolute;
+  position: relative;
   left:0px;
   padding: 10px;
   margin: 10px;
 }
 
 .JournalViewBoxDel{
-  position: absolute;
+  position: relative;
   right: 0px;
   padding: 10px;
   margin: 10px;
@@ -94,7 +98,7 @@
 }
 
 .JournalViewBoxContent{
-  padding-top: 30px;
+  padding-top: 50px;
   padding-bottom: 10px;
 }
 
@@ -104,10 +108,13 @@
 }
 
 input{
+  text-align: center;
+  border: none;
   width: 20em;
   height: 3em;
   margin: 5px;
 }
+
 
 button {
   margin: 5px;
@@ -136,6 +143,17 @@ button:hover {
     :root{
       background: black;
       color: white;
+    }
+
+    input{
+      background: #333;
+      color: white;
+      border:none;
+    }
+
+    ::placeholder{
+      color: whitesmoke !important;
+      text-align: center;
     }
 
     .nav a:visited{
@@ -167,7 +185,20 @@ button:hover {
       color: white;
       background: #333;
     }
-    ::placeholder {
-      color: white;
+
+    .ql-container ::placeholder{
+      color: #cfd0d1;
+
     }
+}
+
+
+@media all and (min-width:1024px){ 
+    :root{
+      width: 65%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+
 }
