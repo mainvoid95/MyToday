@@ -88,7 +88,7 @@ class App extends React.Component{
     }else{
       nav =(
         <div className='nav'>
-          <a><Link to="/">홈</Link></a>
+          <a><Link to="/">홈 </Link></a>
           <a className='register'><Link to="/userRegister">회원가입</Link></a>
           <a className='login' ><Link to="/login">로그인</Link></a>
         </div>

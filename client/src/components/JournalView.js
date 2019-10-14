@@ -19,6 +19,7 @@ class JournalView extends Component{
 
     getJournalList(){
         get('/api/journalview').then((response)=>{
+            console.log(response.data);
             for(let i = 0; i < Object.keys(response.data).length; i++){
                 response.data[i].journal_create_date = response.data[i].journal_create_date.substring(0,10);
                 if(response.data[i].journal_fix_date !== null){
@@ -34,12 +35,19 @@ class JournalView extends Component{
         });
     }
 
+    delJournalList(){
+        
+    }
+
     render(){
         const list = this.state.journals.map(
             (jlist) => (
                 <div className='JournalViewBox'>
-                    <a>{jlist.journal_create_date}</a>
-                    <div dangerouslySetInnerHTML={ {__html: jlist.journal_content} }/>
+                    <nav className='JournalViewBoxNav'>
+                        <a className='JournalViewBoxDate'>{jlist.journal_create_date}</a>
+                        <a className='JournalViewBoxDel' >삭제하기</a>
+                    </nav>
+                    <div className='JournalViewBoxContent' dangerouslySetInnerHTML={ {__html: jlist.journal_content} }/>
                 </div>
             )
         );

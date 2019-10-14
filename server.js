@@ -117,6 +117,7 @@ app.get('/api/logout', (req, res)=>{
     })
 });
 
+//일기 저장하기
 app.post('/api/journalSaveProcess', (req, res)=>{
     let text = req.body.text;
     let user_number = req.body.user_number;
@@ -125,22 +126,30 @@ app.post('/api/journalSaveProcess', (req, res)=>{
     let params = [user_number, text];
     if(req.session.user_number === user_number){
         db.query(sql, params, (err, dbresult, fields) => {
-            console.log(dbresult);
             res.send('');
         })
     }
 });
 
+//저장된 일기 불러오기
 app.get('/api/journalview', (req, res) =>{
     let sql = `SELECT journal_num, journal_create_date, journal_fix_date, journal_content FROM journal WHERE user_number = ? ORDER BY journal_num DESC `;
     let user_number = req.session.user_number
     let params = [user_number];
     db.query(sql, params, (err, dbresult, fields) => {
-        console.log(dbresult);
         res.send(dbresult);
     })
-    
 });
+
+//일기 삭제
+app.post('/api/journaldel', (req, res)=>{
+    let sql = 'DELETE FROM journal WHERE journal_num = ?'
+    let journal_num = req.body.journal_num;
+    let params = [journal_num];
+    db.query(sql, params, (err, dbresult, fields)=>{
+        res.send('');
+    })
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
