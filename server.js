@@ -143,6 +143,7 @@ app.get('/api/journalview', (req, res) =>{
 
 //일기 삭제
 app.post('/api/journaldel', (req, res)=>{
+    console.log(req.body.journal_num);
     let sql = 'DELETE FROM journal WHERE journal_num = ?'
     let journal_num = req.body.journal_num;
     let params = [journal_num];
