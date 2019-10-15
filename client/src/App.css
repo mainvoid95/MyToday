@@ -7,13 +7,13 @@
   font-family: 'Iropke Batang', serif; 
 }
 
+*:focus{
+  outline: none;
+}
+
 .main {
   text-align: center;
   margin-top: 50px;
-}
-
-.App-link {
-  color: #09d3ac;
 }
 
 .nav{
@@ -33,6 +33,7 @@
 }
 
 .nav a{
+  color: black;
   display: inline;
   margin-left: 10px;
   text-decoration: none !important;
@@ -63,22 +64,12 @@ p{
   padding: 10px;
 }
 
-.JournalViewBoxNav{
-
-}
-
 .JournalViewBoxDate{
   position: relative;
   left:0px;
   padding: 10px;
   margin: 10px;
-}
-
-.JournalViewBoxDel{
-  position: relative;
-  right: 0px;
-  padding: 10px;
-  margin: 10px;
+  margin-right: 2em;
 }
 
 .JournalViewBoxDel:visited{
@@ -95,6 +86,26 @@ p{
   display: inline;
   margin-left: 10px;
   text-decoration: none !important;
+  position: relative;
+  right: 0px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.JournalViewBoxFix:visited{
+  color: black;
+  text-decoration: none !important;
+}
+
+.JournalViewBoxFix:hover{
+  color: gray;
+  transition: 0.2s;
+}
+
+.JournalViewBoxFix{
+  position: relative;
+  display: inline;
+  text-decoration: none !important;
 }
 
 .JournalViewBoxContent{
@@ -108,11 +119,18 @@ p{
 }
 
 input{
-  text-align: center;
-  border: none;
+  background-color: #cfd0d1;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: 0 !important;
   width: 20em;
   height: 3em;
   margin: 5px;
+  padding: 5px;
+}
+
+input::placeholder{
+  opacity: 0.5;
 }
 
 
@@ -123,6 +141,9 @@ button {
   background: #cfd0d1;
   padding: 5px 10px 5px 10px;
   text-decoration: none;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: 0 !important;
 }
 
 button:hover {
@@ -174,6 +195,7 @@ button:hover {
       color: #cfd0d1;
       background: #333;
       border: none;
+      box-shadow: none;
     }
 
     .JournalViewBox{
@@ -188,11 +210,80 @@ button:hover {
 
     .ql-container ::placeholder{
       color: #cfd0d1;
-
     }
 }
 
+/* se */
+@media all and (min-width:320px){ 
+  :root{
+    font-size: 15px;
+  }
 
+  .JournalViewBoxDate{
+    position: relative;
+    left:0px;
+    padding: 10px;
+    margin: 10px;
+    margin-right: 2em;
+  }
+
+
+  input{
+    text-align: left;
+    border: none;
+    width: 90%;
+    height: 40px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  input::placeholder{
+    text-align: left;
+  }
+
+  button{
+    font-size: 1em;
+    width: 40%;
+    height: 30%;
+  }
+
+}
+
+/* 일반적인 폰 */
+@media all and (min-width:425px){ 
+  .JournalViewBoxDate{
+    position: relative;
+    left:0px;
+    padding: 10px;
+    margin: 10px;
+    margin-right: 6em;
+  }
+}
+
+/* 테블릿 */
+@media all and (min-width:768px){ 
+  :root{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .JournalViewBoxDate{
+    position: relative;
+    left:0px;
+    padding: 10px;
+    margin: 10px;
+    margin-right: 10em;
+  }
+  
+  button{
+    font-size: 1em;
+    width: 8em;
+    height: 30%;
+  }
+}
+
+/* 데스크탑이나 고해상도 테블릿 */
 @media all and (min-width:1024px){ 
     :root{
       width: 65%;
@@ -200,5 +291,18 @@ button:hover {
       margin-right: auto;
     }
 
+    .JournalViewBoxDate{
+      position: relative;
+      left:0px;
+      padding: 10px;
+      margin: 10px;
+      margin-right: 10em;
+    }
 
+    button{
+      font-size: 1em;
+      width: 8em;
+      height: 30%;
+    }
+  
 }

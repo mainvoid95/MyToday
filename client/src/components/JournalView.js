@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {get, post} from 'axios';
-import style from '../App.css';
+import '../App.css';
 import {Link, Route} from 'react-router-dom';
+import JournalFix from './JournalFix';
 
 class JournalView extends Component{
     constructor(props){
         super(props);
         this.state={
-            journals:null,
+            journals:[],
             del_journal_num: null,
         }
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -15,10 +16,32 @@ class JournalView extends Component{
         this.handledelJournal = this.handledelJournal.bind(this);
     }
 
+
     componentDidMount(){
         this.getJournalList();
     }
 
+    componentDidUpdate = () =>{
+        this.getJournalList();
+    }
+
+    makeJournalList = () =>{
+        let list = this.state.journals.map(
+            (jlist, i) => (
+                <div key={i} className='JournalViewBox'>
+                    <nav className='JournalViewBoxNav'>
+                        <a className='JournalViewBoxDate'>{jlist.journal_create_date}</a>
+                        <a className='JournalViewBoxFix' data-num={jlist.journal_num}>상세보기</a>
+                        <a className='JournalViewBoxDel' data-num={jlist.journal_num} onClick={
+                            this.handledelJournal.bind(this)
+                        }>삭제하기</a>
+                    </nav>
+                    <div className='JournalViewBoxContent' dangerouslySetInnerHTML={ {__html: jlist.journal_content} }/>
+                </div>
+            )
+        );
+        return list;
+    }
 
     getJournalList(){
         get('/api/journalview').then((response)=>{
@@ -31,9 +54,8 @@ class JournalView extends Component{
             this.setState({
                 journals : response.data,
             })
-            console.log(this.state.journals);
         }).catch((err)=>{
-            console.log(err)
+            
         });
     }
 
@@ -42,6 +64,7 @@ class JournalView extends Component{
         this.setState({
             del_journal_num: String(e.currentTarget.dataset.num),
         })
+        console.log(this.state.del_journal_num);
         post('/api/journaldel', {
             journal_num: this.state.del_journal_num
         }).then((response) =>{
@@ -52,24 +75,11 @@ class JournalView extends Component{
 
     render(){
         let list = null;
-        if (this.state.journals !== null){
-            list = this.state.journals.map(
-                (jlist) => (
-                    <div className='JournalViewBox'>
-                        <nav className='JournalViewBoxNav'>
-                            <a className='JournalViewBoxDate'>{jlist.journal_create_date}</a>
-                            <a className='JournalViewBoxDel' data-num={jlist.journal_num} onClick={
-                                this.handledelJournal.bind(this)
-                            }>삭제하기</a>
-                        </nav>
-                        <div className='JournalViewBoxContent' dangerouslySetInnerHTML={ {__html: jlist.journal_content} }/>
-                    </div>
-                )
-            );
+        if (Object.keys(this.state.journals).length > 0){
+            list = this.makeJournalList();
         }else{
-            list = <div className='JournalViewBox' >작성된 기록이 없습니다 일기를 작성해주세요 </div>
+            list = <div key={0}  className='JournalViewBox' >작성된 기록이 없습니다 일기를 작성해주세요 </div>
         }
-        
         return(
             <div>
                {list}

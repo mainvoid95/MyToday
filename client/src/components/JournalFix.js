@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {post} from 'axios'
+import {get, post} from 'axios'
 import '../App.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css'; 
 
 
-class Journal extends Component{
+export default class JournalFix extends Component{
     constructor(props){
         super(props);
         this.state ={
@@ -14,6 +14,16 @@ class Journal extends Component{
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleValueChange = this.handleValueChange.bind(this);
         this.journalSaveProcess = this.journalSaveProcess.bind(this);
+    }
+
+    componentDidMount= () =>{
+        
+    }
+
+    getJournalText = () => {
+        get('/api/jounalfix').then((res) => {
+            
+        })
     }
 
 
@@ -52,4 +62,3 @@ class Journal extends Component{
         )
     }
 }
-export default Journal

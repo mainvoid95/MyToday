@@ -143,7 +143,6 @@ app.get('/api/journalview', (req, res) =>{
 
 //일기 삭제
 app.post('/api/journaldel', (req, res)=>{
-    console.log(req.body.journal_num);
     let sql = 'DELETE FROM journal WHERE journal_num = ?'
     let journal_num = req.body.journal_num;
     let params = [journal_num];
@@ -151,6 +150,16 @@ app.post('/api/journaldel', (req, res)=>{
         res.send('');
     })
 })
+
+//일기 수정을 위한 기존 일기 데이터 가져오기
+app.get('api/journalfix', (req, res) =>{
+    let sql = `SELECT journal_content FROM journal WHRER journal_num = ?`
+    let journal_num = req.body.journal_num;
+    let params = [journal_num];
+    db.query(sql, params, (err, dbresult, fields)=>{
+        res.send(dbresult);
+    })
+} )
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
