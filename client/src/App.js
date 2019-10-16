@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, Redirect, Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import './App.css';
-import {get} from 'axios'
 import Home from './components/Home';
 import UsersRegister from './components/UserRegister';
 import Login from './components/Login';

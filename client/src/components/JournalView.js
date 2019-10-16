@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {get, post} from 'axios';
 import '../App.css';
-import {Link, Route, Router} from 'react-router-dom';
-import JournalFix from './JournalFix';
+import {Link} from 'react-router-dom';
 
 class JournalView extends Component{
     constructor(props){
@@ -31,7 +30,7 @@ class JournalView extends Component{
                 <div key={i} className='JournalViewBox'>
                     <nav className='JournalViewBoxNav'>
                         <a className='JournalViewBoxDate'>{jlist.journal_create_date}</a>
-                        <Link to={`/journalfix/${jlist.journal_num}`}><a className='JournalViewBoxFix'>수정하기</a></Link>
+                        <Link  className='JournalViewBoxFix' to={`/journalfix/${jlist.journal_num}`}><a className='JournalViewBoxFix'>수정하기</a></Link>
                         <a className='JournalViewBoxDel' data-num={jlist.journal_num} onClick={
                             this.handledelJournal.bind(this)
                         }>삭제하기</a>

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios'
 import '../App.css';
-import {Redirect} from 'react-router-dom';
 
 
 class JournalFix extends Component{
