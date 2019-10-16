@@ -25,8 +25,7 @@ class UserRegister extends Component{
     handleFormSubmit(e){
         e.preventDefault()
         this.addUser().then((response)=>{
-            this.props.stateRefresh();
-
+            this.props.stateRefresh('home');
         })
         this.setState({
             id:'',
@@ -76,7 +75,7 @@ class UserRegister extends Component{
             email : this.state.email,
             name : this.state.name
         }).then((response) =>{
-            console.log(response);
+            
         })
     }
 

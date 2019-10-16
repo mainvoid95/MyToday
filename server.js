@@ -38,7 +38,6 @@ const db = mysql.createConnection({
 db.connect();
 
 
-
 //세션데이터를 react로 보내기위한 get동작
 app.get('/api/getSession', (req, res) => {
     if(req.session.is_logined){
@@ -64,7 +63,6 @@ app.post('/api/usersRegister', (req, res) =>{
     let pass = input.password;
     //비밀번호는 암호화해서 db에 저장함
     bcrypt.hash(pass, saltRounds, function(err, hash){
-        console.log(hash);
         let pass = hash;
         let params = [id, pass, email, name];
         db.query(sql, params, (err,rows,fields)=>{
@@ -74,7 +72,7 @@ app.post('/api/usersRegister', (req, res) =>{
                     console.log('아이디 중복 생성');
                 }
             }else{
-                res.send(rows);
+                res.redirect('/');
             }
         })
     });

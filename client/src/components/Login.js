@@ -39,7 +39,6 @@ class Login extends Component{
             id: this.state.id,
             password: this.state.pass,
         }).then((response) =>{
-            console.log(response);
         })
     }
 

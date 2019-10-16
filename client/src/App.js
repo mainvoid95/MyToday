@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect, Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import './App.css';
+import {get} from 'axios';
 import Home from './components/Home';
 import UsersRegister from './components/UserRegister';
 import Login from './components/Login';
@@ -39,13 +40,13 @@ class App extends React.Component{
   }
 
   changeUserState(){
-    this.callApi().then((res) => {
-      if(res.is_logined===true){
+    get('/api/getSession').then((res) => {
+      if(res.data.is_logined === true){
         this.setState({
-          is_logined: res.is_logined,
-          user_id: res.user_id,
-          user_number: res.user_number,
-          user_name: res.user_name,
+          is_logined: res.data.is_logined,
+          user_id: res.data.user_id,
+          user_number: res.data.user_number,
+          user_name: res.data.user_name,
           refreshPage: true,
         })
       }else{
@@ -67,13 +68,6 @@ class App extends React.Component{
     this.changeUserState();
   }
 
-  //유저정보 가져오는 api 호출
-  callApi = async () => {
-    const response = await fetch('/api/getSession');
-    const body = await response.json();
-    // console.log(body);
-    return body;
-  }
 
   //네비게이터 
   loginedNav(){
