@@ -5,6 +5,7 @@
 
 * {
   font-family: 'Iropke Batang', serif; 
+
 }
 
 *:focus{
@@ -20,6 +21,10 @@
   color: black;
   margin-top: 30px;
   margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid;
+  border-color: black;
 }
 
 .nav a:visited{
@@ -127,10 +132,35 @@ input{
   height: 3em;
   margin: 5px;
   padding: 5px;
+  transition: 0.3s;
+}
+
+input:hover{
+  background: black;
+  color:  #cfd0d1;
+  transition: 0.3s;
+}
+
+input:hover::placeholder{
+  color: #cfd0d1 !important;
+  transition: 0.3s;
+
+}
+
+input:focus{
+  background: black;
+  color:  whitesmoke;
+  transition: 0.3s;
+}
+
+input:focus::placeholder{
+  color: #cfd0d1 !important;
+  transition: 0.3s;
 }
 
 input::placeholder{
   opacity: 0.5;
+  transition: 0.3s;
 }
 
 
@@ -154,9 +184,14 @@ button:hover {
 }
 
 /* 저널 에디터의 크기 조절 */
-.ql-editor {
+.JournalEdit {
+  font-size: 15px;
+  width: 80%;
   min-height: 20em;
   max-height: 20em;
+  margin-right: auto;
+  margin-left: auto;
+  border: none;
 }
 
 /* 다크모드 적용 */
@@ -170,11 +205,41 @@ button:hover {
       background: #333;
       color: white;
       border:none;
+      transition: 0.3s;
+    }
+
+    input:hover{
+      background: #cfd0d1;
+      color:  black;
+      transition: 0.3s;
+    }
+
+    input:hover::placeholder{
+      color: black !important;
+      transition: 0.3s;
+    }
+
+    input:focus{
+      background: #cfd0d1;
+      color:  black;
+      transition: 0.3s;
+    }
+
+    input:focus::placeholder{
+      color: black !important;
+      transition: 0.3s;
+
     }
 
     ::placeholder{
       color: whitesmoke !important;
-      text-align: center;
+      transition: 0.3s;
+
+    }
+    
+    .nav{
+      border-bottom: 1px solid;
+      border-color: white;
     }
 
     .nav a:visited{
@@ -198,17 +263,22 @@ button:hover {
       box-shadow: none;
     }
 
+    button:hover{
+      color: #333;
+      background: #cfd0d1;
+    }
+
     .JournalViewBox{
       background-color: #333;
     }
 
     /* 저널 에디터 */
-    .ql-editor {
+    .JournalEdit {
       color: white;
       background: #333;
     }
 
-    .ql-container ::placeholder{
+    .JournalEdit ::placeholder{
       color: #cfd0d1;
     }
 }
@@ -275,6 +345,15 @@ button:hover {
     margin: 10px;
     margin-right: 10em;
   }
+
+  input{
+    text-align: left;
+    border: none;
+    width: 40%;
+    height: 40px;
+    margin-right: auto;
+    margin-left: auto;
+  }
   
   button{
     font-size: 1em;
@@ -297,6 +376,15 @@ button:hover {
       padding: 10px;
       margin: 10px;
       margin-right: 10em;
+    }
+
+    input{
+      text-align: left;
+      border: none;
+      width: 300px;
+      height: 40px;
+      margin-right: auto;
+      margin-left: auto;
     }
 
     button{

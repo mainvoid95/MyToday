@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios'
 import '../App.css';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.bubble.css'; 
 
 
 class Journal extends Component{
@@ -12,7 +10,6 @@ class Journal extends Component{
             text:''
             }
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        this.handleValueChange = this.handleValueChange.bind(this);
         this.journalSaveProcess = this.journalSaveProcess.bind(this);
     }
 
@@ -21,12 +18,6 @@ class Journal extends Component{
         e.preventDefault();
         this.journalSaveProcess().then((response)=>{
             this.props.stateRefresh('journaledit');
-        });
-    }
-
-    handleValueChange(e) {
-        this.setState({
-            text:e,
         });
     }
     
@@ -45,7 +36,9 @@ class Journal extends Component{
         return(
             <div className='Journal'>
                 <form onSubmit={this.handleFormSubmit}>
-                    <ReactQuill className='JournalEdit' theme="bubble" value={this.state.text} placeholder='여기에 일기를 쓰면 됩니다! 어떤 내용이든지 상관 없어요!' onChange={this.handleValueChange} />
+                    <textarea className='JournalEdit' placeholder='여기에 일기를 쓰면 됩니다! 어떤 내용이든지 상관 없어요!' wrap="hard" value={this.state.text} onChange={
+                            e => this.setState({text:e.target.value})
+                        } /><br/>
                     <button type="submit">저장하기</button>
                 </form>
             </div>

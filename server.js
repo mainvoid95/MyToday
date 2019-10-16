@@ -120,6 +120,7 @@ app.get('/api/logout', (req, res)=>{
 //일기 저장하기
 app.post('/api/journalSaveProcess', (req, res)=>{
     let text = req.body.text;
+    text = text.replace(/(?:\r\n|\r|\n)/g, '<br/>');
     let user_number = req.body.user_number;
     console.log(user_number, text);
     let sql = `INSERT INTO journal (user_number, journal_content) VALUE(?,?)`;
@@ -143,7 +144,7 @@ app.get('/api/journalview', (req, res) =>{
 
 //일기 삭제
 app.post('/api/journaldel', (req, res)=>{
-    let sql = 'DELETE FROM journal WHERE journal_num = ?'
+    let sql = 'DELETE FROM journal WHERE journal_num = ?';
     let journal_num = req.body.journal_num;
     let params = [journal_num];
     db.query(sql, params, (err, dbresult, fields)=>{
@@ -152,14 +153,26 @@ app.post('/api/journaldel', (req, res)=>{
 })
 
 //일기 수정을 위한 기존 일기 데이터 가져오기
-app.get('api/journalfix', (req, res) =>{
-    let sql = `SELECT journal_content FROM journal WHRER journal_num = ?`
+app.post('/api/journalcontentget', (req, res) =>{
+    let sql = `SELECT journal_content FROM journal WHERE journal_num = ?`;
     let journal_num = req.body.journal_num;
     let params = [journal_num];
     db.query(sql, params, (err, dbresult, fields)=>{
         res.send(dbresult);
     })
-} )
+})
+
+//일기 수정하기
+app.post('/api/journalupdate', (req, res)=>{
+    let text = req.body.text;
+    text = text.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+    let journal_num = req.body.journal_num;
+    let sql = `UPDATE journal SET journal_content = ? WHERE journal_num = ?`;
+    let params = [text, journal_num];
+    db.query(sql, params, (err, dbresult, fields) => {
+        res.send('');
+    })
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 

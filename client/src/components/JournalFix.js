@@ -1,29 +1,44 @@
 import React, {Component} from 'react';
-import {get, post} from 'axios'
+import {post} from 'axios'
 import '../App.css';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.bubble.css'; 
+import {Redirect} from 'react-router-dom';
 
 
-export default class JournalFix extends Component{
+class JournalFix extends Component{
     constructor(props){
         super(props);
         this.state ={
-            text:''
+            text:'',
+            journal_num: null,
             }
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        this.handleValueChange = this.handleValueChange.bind(this);
         this.journalSaveProcess = this.journalSaveProcess.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+
+        this.quillRef = null;      // Quill instance
+        this.reactQuillRef = null; // ReactQuill component
+     
     }
 
-    componentDidMount= () =>{
+
+    componentDidMount(){        
+        this.setState({
+            journal_num : this.props.match.params.journalnum
+        }, () =>{
+        post('/api/journalcontentget',{journal_num:this.state.journal_num}
+        ).then((response) => {
+            console.log(response);
+            let text = response.data[0].journal_content;
+            text = text.replace(/<br\/>/gi , "\r\n");
+            this.setState({
+                text: text
+            })
+        })});
         
     }
 
-    getJournalText = () => {
-        get('/api/jounalfix').then((res) => {
-            
-        })
+    componentDidUpdate(){
+        
     }
 
 
@@ -33,18 +48,12 @@ export default class JournalFix extends Component{
             this.props.stateRefresh('journaledit');
         });
     }
-
-    handleValueChange(e) {
-        this.setState({
-            text:e,
-        });
-    }
     
     journalSaveProcess(){
         return (
-            post('/api/journalSaveProcess', {
-                user_number: this.props.user_number,
-                text: this.state.text
+            post('/api/journalupdate', {
+                text: this.state.text,
+                journal_num: this.state.journal_num,
             }).then((response) =>{
                 console.log(response);
             })
@@ -55,10 +64,14 @@ export default class JournalFix extends Component{
         return(
             <div className='Journal'>
                 <form onSubmit={this.handleFormSubmit}>
-                    <ReactQuill className='JournalEdit' theme="bubble" value={this.state.text} placeholder='여기에 일기를 쓰면 됩니다! 어떤 내용이든지 상관 없어요!' onChange={this.handleValueChange} />
+                    <textarea className='JournalEdit' placeholder='여기에 일기를 쓰면 됩니다! 어떤 내용이든지 상관 없어요!' wrap="hard"  value={this.state.text} onChange={
+                        e => this.setState({text:e.target.value})
+                    } /><br/>
                     <button type="submit">저장하기</button>
                 </form>
             </div>
         )
     }
 }
+
+export default JournalFix;

@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link, Redirect, Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import './App.css';
+import {get} from 'axios'
 import Home from './components/Home';
 import UsersRegister from './components/UserRegister';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Jouranl from './components/Journal';
 import JouranlView from './components/JournalView';
+import JournalFix from './components/JournalFix';
+
 
 class App extends React.Component{
   constructor(props){
@@ -79,7 +82,7 @@ class App extends React.Component{
     if(this.state.is_logined === true){
       nav = ( 
       <div className='nav'>
-        <a><Link to="/">홈</Link></a>
+        <a><Link to="/">MyToday</Link></a>
         <a><Link to="/journal">일기</Link></a>
         <a><Link to='/jouranlview'>기록</Link></a>
         <a className='logout' ><Link to="/logout">{this.state.user_name}</Link></a><br/> 
@@ -88,7 +91,7 @@ class App extends React.Component{
     }else{
       nav =(
         <div className='nav'>
-          <a><Link to="/">홈 </Link></a>
+          <a><Link to="/">MyToday</Link></a>
           <a className='register'><Link to="/userRegister">회원가입</Link></a>
           <a className='login' ><Link to="/login">로그인</Link></a>
         </div>
@@ -128,6 +131,7 @@ class App extends React.Component{
                 <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
                 <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
                 <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number} />}/>
+                <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
               </Switch>
              </main>
           </Router>
