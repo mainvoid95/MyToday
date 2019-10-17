@@ -84,24 +84,26 @@ app.post('/api/login', (req, res) =>{
     let sql = `SELECT * FROM user WHERE user_id = ? `;
     let id = input.id;
     let pass = input.password;
-    console.log(id, pass)
     let params = [id];
     db.query(sql,params,(err, dbresult, fields)=>{
-        let dbpass = dbresult[0].user_pass;
-        bcrypt.compare(pass, dbpass, function(err, result){
-            if(result){
-                console.log('비밀번호 일치');
-                //일치시 세션에 정보 저장
-                req.session.is_logined = true;
-                req.session.user_number = dbresult[0].user_number;
-                req.session.user_id = dbresult[0].user_id;
-                req.session.user_name = dbresult[0].user_name;
-                res.send('/');
-            }else{
-                console.log('비밀번호 비일치');
-            }
-        }); 
-        
+        if(dbresult[0].user_id !== undefined){
+            let dbpass = dbresult[0].user_pass;
+            bcrypt.compare(pass, dbpass, function(err, result){
+                if(result){
+                    console.log('비밀번호 일치');
+                    //일치시 세션에 정보 저장
+                    req.session.is_logined = true;
+                    req.session.user_number = dbresult[0].user_number;
+                    req.session.user_id = dbresult[0].user_id;
+                    req.session.user_name = dbresult[0].user_name;
+                    res.send('/');
+                }else{
+                    console.log('비밀번호 비일치');
+                }
+            }); 
+        }else{
+            console.log('입력된 값이 올바르지 않습니다');
+        }
     });
 })
 
