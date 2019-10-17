@@ -5,6 +5,10 @@
 /client/node_modules/
 /.pnp
 .pnp.js
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2ef2d49374bcea57b39d2fb57dbcd5a7d910dbaf
 
 
 # testing
