@@ -4,7 +4,7 @@ import '../App.css';
 import Popup from 'react-popup';
 
 
-class UserRegister extends Component{
+class UserInfoUpdate extends Component{
     constructor(props){
         super(props);
         this.state ={
@@ -103,4 +103,4 @@ class UserRegister extends Component{
     }
 }
 
-export default UserRegister
+export default UserInfoUpdate

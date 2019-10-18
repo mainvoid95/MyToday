@@ -47,6 +47,7 @@ app.get('/api/getSession', (req, res) => {
                 "user_number":req.session.user_number,
                 "user_id" : req.session.user_id,
                 "user_name": req.session.user_name,
+                "user_email": req.session.user_email,
             }
         )
     }
@@ -69,7 +70,7 @@ app.post('/api/usersRegister', (req, res) =>{
             //동일한 아이디로 중복 생성시 에러처리
             if(err){
                 if(err.code === 'ER_DUP_ENTRY'){
-                    console.log('아이디 중복 생성');
+                    res.send('id_exist');
                 }
             }else{
                 res.redirect('/');
@@ -86,23 +87,23 @@ app.post('/api/login', (req, res) =>{
     let pass = input.password;
     let params = [id];
     db.query(sql,params,(err, dbresult, fields)=>{
-        if(dbresult[0].user_id !== undefined){
+        if(Object.keys(dbresult).length  > 0){
             let dbpass = dbresult[0].user_pass;
             bcrypt.compare(pass, dbpass, function(err, result){
                 if(result){
-                    console.log('비밀번호 일치');
                     //일치시 세션에 정보 저장
                     req.session.is_logined = true;
                     req.session.user_number = dbresult[0].user_number;
                     req.session.user_id = dbresult[0].user_id;
                     req.session.user_name = dbresult[0].user_name;
-                    res.send('/');
+                    req.session.user_email = dbresult[0].user_email;
+                    res.send('login_sucess');
                 }else{
-                    console.log('비밀번호 비일치');
+                    res.send('pass_is_not_same');
                 }
             }); 
         }else{
-            console.log('입력된 값이 올바르지 않습니다');
+            res.send('login_fail');
         }
     });
 })
@@ -173,6 +174,8 @@ app.post('/api/journalupdate', (req, res)=>{
         res.send('');
     })
 });
+
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
