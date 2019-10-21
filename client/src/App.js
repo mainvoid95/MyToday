@@ -70,6 +70,7 @@ class App extends React.Component{
     this.changeUserState();
   }
 
+  //로그아웃 함수
   logout= () => {
     get('/api/logout').then((response)=>{
       this.stateRefresh();
@@ -78,6 +79,7 @@ class App extends React.Component{
     });
   }
 
+  //유저 정보 팝업 함수
   userInfoPopup = () => {
     Popup.create({
       title: '회원정보',

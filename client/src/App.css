@@ -85,7 +85,7 @@ p{
   left:0px;
   padding: 10px;
   margin: 10px;
-  margin-right: 2em;
+  margin-right: 6em !important;
 }
 
 .JournalViewBoxDel:visited{
@@ -173,7 +173,9 @@ input::placeholder{
   transition: 0.3s;
 }
 
-
+.inputName{
+  ime-mode: disabled;
+}
 
 
 button {
@@ -480,7 +482,7 @@ textarea::placeholder{
 
 
 /* se */
-@media all and (max-width:320px) { 
+@media (max-width:320px) { 
   :root{
     width: 100% !important;
     font-size: 15px;
@@ -493,11 +495,12 @@ textarea::placeholder{
   .JournalViewBoxDate{
     position: relative;
     left:0px;
+    margin-right: 100px !important;
     /* padding: 10px; */
   }
 
   .JournalViewBoxFix{
-    margin-left: -53px;
+    margin-left: 0px;
   }
 
   input{
@@ -541,7 +544,7 @@ textarea::placeholder{
 }
 
 /* 일반적인 폰 */
-@media all and (max-width:425px){ 
+@media (max-width:425px){ 
   :root{
     width: 100% !important;
     font-size: 15px;
@@ -552,7 +555,7 @@ textarea::placeholder{
     left:0px;
     padding: 10px;
     margin: 10px;
-    margin-right: 6em;
+    margin-right: 4em;
   }
 
   .JournalViewBoxFix{
@@ -577,7 +580,7 @@ textarea::placeholder{
 }
 
 /* 테블릿 */
-@media all and (max-width:768px){ 
+@media (max-width:768px){ 
   :root{
     width: 80%;
     margin-left: auto;
