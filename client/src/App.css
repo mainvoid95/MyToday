@@ -5,6 +5,12 @@
   color: --color-white;
 }
 
+html{
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+}
+
 * {
   font-family: 'Iropke Batang', serif; 
 }
@@ -14,8 +20,9 @@
 }
 
 .main {
+  min-height: 100%;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 1em;
 }
 
 .nav{
@@ -26,6 +33,7 @@
   padding-bottom: 10px;
   border-bottom: 1px solid;
   border-color: --color-white;
+  width: 100%;
 }
 
 .nav a:visited{
@@ -129,6 +137,10 @@ p{
   padding-bottom: 10px;
 }
 
+.JournalViewNav{
+  margin: 10px;
+}
+
 .RegisterForm{ 
   margin-left: auto; 
   margin-right: auto; 
@@ -177,7 +189,6 @@ input::placeholder{
   ime-mode: disabled;
 }
 
-
 button {
   margin: 5px;
   color: #333;
@@ -210,6 +221,31 @@ button:hover {
 
 textarea::placeholder{
   opacity: 0.5;
+}
+
+.warp {
+  min-height: 100% !important;
+  position: relative !important;
+  }
+
+
+.Mainfooter{
+  border-top: 1px solid;
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.GithubImg{
+  width: auto;
+  height: auto;
+  margin-left: 10px;
 }
 
 /* 다크모드 적용 */
@@ -286,6 +322,10 @@ textarea::placeholder{
     button:hover{
       color: #333;
       background: #cfd0d1;
+    }
+
+    .GithubImg{
+      filter: invert();
     }
 
     .JournalViewBox{
@@ -492,6 +532,12 @@ textarea::placeholder{
     margin-right: 0px;
     padding-bottom: 10px;
   }
+
+  .Mainfooter{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
   .JournalViewBoxDate{
     position: relative;
     left:0px;
@@ -539,6 +585,10 @@ textarea::placeholder{
       display: block;
       text-align: center;
       margin-top: 10px;
+  }
+
+  .warp {
+    padding-bottom: 10px; /* footer height */
   }
 
 }
@@ -609,12 +659,17 @@ textarea::placeholder{
     width: 8em;
     height: 30%;
   }
+
+  .warp {
+    padding-bottom: 70px; /* footer height */
+  }
   
 }
 
 /* 데스크탑이나 고해상도 테블릿 */
 @media all and (min-width:1024px){ 
     :root{
+      font-size: 20px;
       width: 65%;
       margin-left: auto;
       margin-right: auto;
@@ -642,6 +697,11 @@ textarea::placeholder{
       width: 8em;
       height: 30%;
     }
+
+    .warp {
+      padding-bottom: 90px; /* footer height */
+    }
+    
   
   
 }

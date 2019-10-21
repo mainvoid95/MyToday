@@ -11,6 +11,7 @@ import JouranlView from './components/JournalView';
 import JournalFix from './components/JournalFix';
 import UserInfoUpdate from './components/UserInfoUpdate';
 import Popup from 'react-popup';
+import github from './GitHub.png';
 
 
 
@@ -41,25 +42,27 @@ class App extends React.Component{
   }
 
   changeUserState = () => {
-    get('/api/getSession').then((res) => {
-      if(res.data.is_logined === true){
-        this.setState({
-          is_logined: res.data.is_logined,
-          user_id: res.data.user_id,
-          user_number: res.data.user_number,
-          user_name: res.data.user_name,
-          user_email: res.data.user_email,
-          refreshPage: true,
-        })
-      }else{
-        this.setState({
-          user_id: '',
-          user_number: '',
-          user_name: '',
-          refreshPage: true,
-        });
-      }
-    }).catch(err => console.log(err));
+    if(this.state.is_logined === false){
+      get('/api/getSession').then((res) => {
+        if(res.data.is_logined === true){
+          this.setState({
+            is_logined: res.data.is_logined,
+            user_id: res.data.user_id,
+            user_number: res.data.user_number,
+            user_name: res.data.user_name,
+            user_email: res.data.user_email,
+            refreshPage: true,
+          })
+        }else{
+          this.setState({
+            user_id: '',
+            user_number: '',
+            user_name: '',
+            refreshPage: true,
+          });
+        }
+      }).catch(err => console.log(err));
+    }
   }
 
   componentDidMount = () =>{
@@ -109,20 +112,20 @@ class App extends React.Component{
     let nav = null;
     if(this.state.is_logined === true){
       nav = ( 
-      <div className='nav'>
+      <nav className='nav'>
         <a><Link to="/">MyToday</Link></a>
         <a><Link to="/journal">일기</Link></a>
         <a><Link to='/jouranlview'>기록</Link></a>
         <a className='userinfo' onClick={this.userInfoPopup}>{this.state.user_name}</a><br/> 
-      </div>
+      </nav>
       )
     }else{
       nav =(
-        <div className='nav'>
+        <nav className='nav'>
           <a><Link to="/">MyToday</Link></a>
           <a className='register'><Link to="/userRegister">회원가입</Link></a>
           <a className='login' ><Link to="/login">로그인</Link></a>
-        </div>
+        </nav>
       )
     }
     return nav
@@ -144,19 +147,24 @@ class App extends React.Component{
             <header>
               {this.loginedNav()}
             </header>
-            <main className='main'>
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
-                <Route path='/logout' component={() =><Logout stateRefresh={this.stateRefresh} />}/>
-                <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
-                <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
-                <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number} />}/>
-                <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
-                <Route path="/userinfoupdate" component={()=> <UserInfoUpdate user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
-              </Switch>
-              <Popup />
-             </main>
+            <div className='warp'>
+              <main className='main'>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
+                  <Route path='/logout' component={() =><Logout stateRefresh={this.stateRefresh} />}/>
+                  <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
+                  <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
+                  <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number} />}/>
+                  <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
+                  <Route path="/userinfoupdate" component={()=> <UserInfoUpdate user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
+                </Switch>
+                <Popup />
+              </main>
+            </div>
+                <footer className='Mainfooter'>
+                  <a href="https://github.com/mainvoid95/MyToday"><img src={github}className='GithubImg' /></a>
+                </footer>
           </Router>
       </div>
     )
