@@ -16,14 +16,9 @@ class UserInfoUpdate extends Component{
             pass_same:false,
             open:false,
         }
-        this.handleFormSubmit = this.handleFormSubmit.bind(this)
-        this.handleValueChange = this.handleValueChange.bind(this)
-        this.addUser = this.addUser.bind(this)
-        this.handleClickOpen = this.handleClickOpen.bind(this)
-        this.handleClose = this.handleClose.bind(this)
     }
 
-    handleFormSubmit(e){
+    handleFormSubmit = (e) =>{
         e.preventDefault()
         this.addUser().then((response)=>{
             if(this.state.pass_same === true){
@@ -46,19 +41,19 @@ class UserInfoUpdate extends Component{
         })
     }
 
-    handleValueChange(e) {
+    handleValueChange = (e) => {
         let nextState = {};
         nextState[e.target.name] = e.target.value;
         this.setState(nextState);
     }
 
-    handleClickOpen(){
+    handleClickOpen = () =>{
         this.setState({
             open:true
         });
     }
 
-    handleClose(){
+    handleClose = () => {
         this.setState({
             id:'',
             pass:'',
@@ -70,7 +65,7 @@ class UserInfoUpdate extends Component{
         })
     }
     
-    addUser(){
+    addUser = () => {
         if(this.state.pass !== this.state.pass_confirm){
             this.setState({pass_same : false});
         }else{

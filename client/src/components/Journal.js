@@ -9,19 +9,17 @@ class Journal extends Component{
         this.state ={
             text:''
             }
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        this.journalSaveProcess = this.journalSaveProcess.bind(this);
     }
 
 
-    handleFormSubmit(e){
+    handleFormSubmit = (e) => {
         e.preventDefault();
         this.journalSaveProcess().then((response)=>{
             this.props.stateRefresh('journaledit');
         });
     }
     
-    journalSaveProcess(){
+    journalSaveProcess = () => {
         return (
             post('/api/journalSaveProcess', {
                 user_number: this.props.user_number,

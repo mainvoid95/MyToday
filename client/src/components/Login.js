@@ -12,12 +12,9 @@ class Login extends Component{
             pass:'',
             open:false,
         }
-        this.handleFormSubmit = this.handleFormSubmit.bind(this)
-        this.handleValueChange = this.handleValueChange.bind(this)
-        this.loginProcess = this.loginProcess.bind(this)
     }
 
-    handleFormSubmit(e){
+    handleFormSubmit = (e) => {
         e.preventDefault()
         this.loginProcess().then((response)=>{
             if(response.data === 'login_fail'){
@@ -35,13 +32,13 @@ class Login extends Component{
         })
     }
 
-    handleValueChange(e) {
+    handleValueChange = (e) => {
         let nextState = {};
         nextState[e.target.name] = e.target.value;
         this.setState(nextState);
     }
     
-    loginProcess(){
+    loginProcess= () => {
         return post('/api/login', {
             id: this.state.id,
             password: this.state.pass,
@@ -55,8 +52,8 @@ class Login extends Component{
             <div className='LoginForm'>
                 <form onSubmit={this.handleFormSubmit}>
                     <h1>로그인</h1>
-                    <input type="text" name='id' placeholder='아이디' minlength="4" value={this.state.id} onChange={this.handleValueChange}></input><br></br>
-                    <input type="password" name='pass' placeholder='비밀번호'  minlength="8" value={this.state.pass} onChange={this.handleValueChange}></input> <br/><br/>
+                    <input type="text" name='id' placeholder='아이디' minLength="4" value={this.state.id} onChange={this.handleValueChange}></input><br></br>
+                    <input type="password" name='pass' placeholder='비밀번호'  minLength="8" value={this.state.pass} onChange={this.handleValueChange}></input> <br/><br/>
                     <button type="submit">로그인</button>
                 </form>
             </div>

@@ -13,13 +13,10 @@ class JournalView extends Component{
             journal_view_arr_num: 0,
             is_update: false,
         }
-        this.componentDidMount = this.componentDidMount.bind(this);
-        this.getJournalList = this.getJournalList.bind(this);
-        this.handledelJournal = this.handledelJournal.bind(this);
     }
 
 
-    componentDidMount(){
+    componentDidMount = () => {
         this.getJournalList();
     }
 
@@ -49,7 +46,7 @@ class JournalView extends Component{
 
 
     //db에 쿼리 요청해서 일기 데이터 불러와서 state에 저장.
-    getJournalList(){
+    getJournalList = () => {
         if(this.state.is_update === false){
             get('/api/journalview').then((response)=>{
                 for(let i = 0; i < Object.keys(response.data).length; i++){

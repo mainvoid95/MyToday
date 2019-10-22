@@ -10,17 +10,10 @@ class JournalFix extends Component{
             text:'',
             journal_num: null,
             }
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        this.journalSaveProcess = this.journalSaveProcess.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
-
-        this.quillRef = null;      // Quill instance
-        this.reactQuillRef = null; // ReactQuill component
-     
     }
 
 
-    componentDidMount(){        
+    componentDidMount = () =>{        
         this.setState({
             journal_num : this.props.match.params.journalnum
         }, () =>{
@@ -36,19 +29,15 @@ class JournalFix extends Component{
         
     }
 
-    componentDidUpdate(){
-        
-    }
 
-
-    handleFormSubmit(e){
+    handleFormSubmit = (e) => {
         e.preventDefault();
         this.journalSaveProcess().then((response)=>{
             this.props.stateRefresh('journaledit');
         });
     }
     
-    journalSaveProcess(){
+    journalSaveProcess = () => {
         return (
             post('/api/journalupdate', {
                 text: this.state.text,
@@ -63,7 +52,7 @@ class JournalFix extends Component{
         return(
             <div className='Journal'>
                 <form onSubmit={this.handleFormSubmit}>
-                    <textarea className='JournalEdit' placeholder='여기에 일기를 쓰면 됩니다! 어떤 내용이든지 상관 없어요!' autoFocus wrap="hard"  value={this.state.text} onChange={
+                    <textarea className='JournalEdit' placeholder='여기에 일기를 쓰면 됩니다!' autoFocus wrap="hard"  value={this.state.text} onChange={
                         e => this.setState({text:e.target.value})
                     } /><br/>
                     <button type="submit">저장하기</button>
