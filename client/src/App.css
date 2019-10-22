@@ -33,7 +33,7 @@ html{
   padding-bottom: 10px;
   border-bottom: 1px solid;
   border-color: --color-white;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .nav a:visited{
@@ -523,6 +523,77 @@ textarea::placeholder{
 
 /* se */
 @media (max-width:320px) { 
+  :root{
+    width: 100% !important;
+    font-size: 15px;
+  }
+  .nav{
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-bottom: 10px;
+  }
+
+  .Mainfooter{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .JournalViewBoxDate{
+    position: relative;
+    left:0px;
+    margin-right: 100px !important;
+    /* padding: 10px; */
+  }
+
+  .JournalViewBoxFix{
+    margin-left: 0px;
+  }
+
+  input{
+    text-align: left;
+    border: none;
+    width: 90%;
+    height: 40px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  input::placeholder{
+    text-align: left;
+  }
+
+  button{
+    font-size: 1em;
+    width: 40%;
+    height: 30%;
+  }
+
+  .mm-popup__box{
+    width: 90%;
+  }
+  
+  .mm-popup__btn{
+      width: 100px;
+      margin-top: 10px;
+  }
+
+  .mm-popup__box__footer {
+      padding-top: 30px;
+  }
+
+  .mm-popup__box__footer {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+  }
+
+  .warp {
+    padding-bottom: 10px; /* footer height */
+  }
+
+}
+
+@media (max-width:375px) { 
   :root{
     width: 100% !important;
     font-size: 15px;

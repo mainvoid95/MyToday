@@ -43,7 +43,7 @@ class App extends React.Component{
 
   changeUserState = () => {
     if(this.state.is_logined === false){
-      get('/api/getSession').then((res) => {
+       get('/api/getSession').then((res) => {
         if(res.data.is_logined === true){
           this.setState({
             is_logined: res.data.is_logined,

@@ -36,7 +36,7 @@ class Journal extends Component{
         return(
             <div className='Journal'>
                 <form onSubmit={this.handleFormSubmit}>
-                    <textarea className='JournalEdit' placeholder='여기에 일기를 쓰면 됩니다!' autofocus wrap="hard" value={this.state.text} onChange={
+                    <textarea className='JournalEdit' placeholder='여기에 일기를 쓰면 됩니다!' autoFocus wrap="hard" value={this.state.text} onChange={
                             e => this.setState({text:e.target.value})
                         } /><br/>
                     <button type="submit">저장하기</button>

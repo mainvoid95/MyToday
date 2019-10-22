@@ -11,6 +11,7 @@ class JournalView extends Component{
             journals:[],
             del_journal_num: null,
             journal_view_arr_num: 0,
+            is_update: false,
         }
         this.componentDidMount = this.componentDidMount.bind(this);
         this.getJournalList = this.getJournalList.bind(this);
@@ -49,19 +50,20 @@ class JournalView extends Component{
 
     //db에 쿼리 요청해서 일기 데이터 불러와서 state에 저장.
     getJournalList(){
-        get('/api/journalview').then((response)=>{
-            for(let i = 0; i < Object.keys(response.data).length; i++){
-                response.data[i].journal_create_date = response.data[i].journal_create_date.substring(0,10);
-                if(response.data[i].journal_fix_date !== null){
-                    response.data[i].journal_fix_date = response.data[i].journal_fix_date.substring(0,10);
+        if(this.state.is_update === false){
+            get('/api/journalview').then((response)=>{
+                for(let i = 0; i < Object.keys(response.data).length; i++){
+                    response.data[i].journal_create_date = response.data[i].journal_create_date.substring(0,10);
+                    if(response.data[i].journal_fix_date !== null){
+                        response.data[i].journal_fix_date = response.data[i].journal_fix_date.substring(0,10);
+                    }
                 }
-            }
-            this.setState({
-                journals : response.data,
-            })
-        }).catch((err)=>{
-            console.log(err);
-        });
+                this.setState({
+                    journals : response.data,
+                    is_update: true,
+                })
+            });
+        }
     }
 
     //일기 지우기 
@@ -74,6 +76,7 @@ class JournalView extends Component{
             journal_num: this.state.del_journal_num
         }).then((response) =>{
             console.log(response);
+            this.setState({is_update:false})
         })
     }
 
