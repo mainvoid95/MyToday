@@ -10,6 +10,7 @@ import Jouranl from './components/Journal';
 import JouranlView from './components/JournalView';
 import JournalFix from './components/JournalFix';
 import UserInfoUpdate from './components/UserInfoUpdate';
+import NotFound from './components/NotFound';
 import Popup from 'react-popup';
 import github from './GitHub.png';
 
@@ -152,12 +153,13 @@ class App extends React.Component{
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
-                  <Route path='/logout' component={() =><Logout stateRefresh={this.stateRefresh} />}/>
+logout' component={() =><Logout stateRefresh={this.stateRefresh} />}/>
                   <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
                   <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
                   <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number} />}/>
                   <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
                   <Route path="/userinfoupdate" component={()=> <UserInfoUpdate user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
+                  <Route component={NotFound}/>
                 </Switch>
                 <Popup />
               </main>

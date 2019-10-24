@@ -4,9 +4,9 @@ function Home(){
     return(
         <div>
             <h1>My Today</h1>
-            <p>Simple</p>
-            <p>Write</p>
-            <p>View</p>
+            <p>간단하게</p>
+            <p>쓰고</p>
+            <p>보자</p>
         </div>
     )
 }
