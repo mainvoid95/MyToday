@@ -5,7 +5,6 @@ import {get} from 'axios';
 import Home from './components/Home';
 import UsersRegister from './components/UserRegister';
 import Login from './components/Login';
-import Logout from './components/Logout';
 import Jouranl from './components/Journal';
 import JouranlView from './components/JournalView';
 import JournalFix from './components/JournalFix';
@@ -30,11 +29,11 @@ class App extends React.Component{
     }
   }
 
-  stateRefresh = (e) => {
+  stateRefresh = (e, is_login) => {
     this.setState({
       mode: e,
       refreshPage : false,
-      is_logined: false,
+      is_logined: is_login,
       user_id:'',
       user_number:'',
       user_name:'',
@@ -56,6 +55,7 @@ class App extends React.Component{
           })
         }else{
           this.setState({
+            is_logined : false,
             user_id: '',
             user_number: '',
             user_name: '',
@@ -153,10 +153,9 @@ class App extends React.Component{
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
-logout' component={() =><Logout stateRefresh={this.stateRefresh} />}/>
                   <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
                   <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
-                  <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number} />}/>
+                  <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>
                   <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
                   <Route path="/userinfoupdate" component={()=> <UserInfoUpdate user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
                   <Route component={NotFound}/>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios' 
+import {RewithRouterdirect} from 'react-router-dom';
 import '../App.css';
 import Popup from 'react-popup';
 
@@ -21,11 +22,24 @@ class UserRegister extends Component{
     handleFormSubmit = (e) =>{
         e.preventDefault()
         this.addUser().then((response)=>{
-            if(this.state.pass_same === true){
-                this.props.stateRefresh('/');
+            console.log(response.data);
+            if(response.data === 'register_success'){
+                Popup.create({
+                    content: `회원가입이 완료되었습니다.`,
+                    buttons: {
+                        right: [ {
+                            text: '닫기',
+                            className: 'success',
+                            action:  () => {
+                                Popup.close();
+                                this.props.stateRefresh('', false);
+                            },
+                        }]
+                    }
+                });
+                
             }else if(response.data === 'id_exist'){
                 Popup.alert('이미 등록된 아이디입니다.');
-
             }else{
                 Popup.alert('비밀번호를 똑같이 입력해주세요');
             }
@@ -70,15 +84,15 @@ class UserRegister extends Component{
             this.setState({pass_same : false});
         }else{
             this.setState({pass_same : true});
+            return post('/api/usersRegister', {
+                id: this.state.id,
+                password: String(this.state.pass),
+                email : this.state.email,
+                name : this.state.name
+            }).then((response) =>{
+                return response;
+            })
         }
-        return post('/api/usersRegister', {
-            id: this.state.id,
-            password: String(this.state.pass),
-            email : this.state.email,
-            name : this.state.name
-        }).then((response) =>{
-            return response;
-        })
     }
 
     render(){
@@ -86,7 +100,7 @@ class UserRegister extends Component{
             <div className='RegisterForm'>
                 <form onSubmit={this.handleFormSubmit}>
                     <h1>회원가입</h1>
-                    <input className='inputName' type="text" name='id' placeholder='아이디' value={this.state.id} minlength="4"    onChange={this.handleValueChange}></input><br/>
+                    <input className='inputName' type="text" name='id' placeholder='아이디' value={this.state.id} minLength="4"    onChange={this.handleValueChange}></input><br/>
                     <input type="password" name='pass' placeholder='비밀번호' minLength="8" value={this.state.pass} onChange={this.handleValueChange}></input><br/>
                     <input type="password" name='pass_confirm' placeholder='비밀번호 재입력'  minLength="8" value={this.state.pass_confirm} onChange={this.handleValueChange}></input><br/>
                     <input type="email" name='email' placeholder='이메일' value={this.state.email}  onChange={this.handleValueChange}></input><br/>

@@ -73,7 +73,7 @@ app.post('/api/usersRegister', (req, res) =>{
                     res.send('id_exist');
                 }
             }else{
-                res.redirect('/');
+                res.send('register_success');
             }
         })
     });
