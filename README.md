@@ -66,6 +66,10 @@
 
 개발 툴 : VScode
 
+개발 OS : macOS 10.15 
+
+서버 OS : ubuntu 18.04 (AWS ec2)
+
 백 엔드 : node.js, express
 
 프론트 엔드: html, css, javascript, React
