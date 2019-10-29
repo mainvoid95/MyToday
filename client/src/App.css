@@ -185,9 +185,6 @@ input::placeholder{
   transition: 0.3s;
 }
 
-.inputName{
-  ime-mode: disabled;
-}
 
 button {
   margin: 5px;

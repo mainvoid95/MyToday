@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios'
+import {Redirect} from 'react-router-dom';
 import '../App.css';
 
 
@@ -7,7 +8,8 @@ class Journal extends Component{
     constructor(props){
         super(props);
         this.state ={
-            text:''
+            text:'',
+            redirectflag:false,
             }
     }
 
@@ -15,7 +17,7 @@ class Journal extends Component{
     handleFormSubmit = (e) => {
         e.preventDefault();
         this.journalSaveProcess().then((response)=>{
-            this.props.stateRefresh('journaledit');
+            this.setState({redirectflag:true});
         });
     }
     
@@ -31,6 +33,9 @@ class Journal extends Component{
     }
 
     render(){
+        if(this.state.redirectflag === true){
+            return <Redirect to='/' />
+        }
         return(
             <div className='Journal'>
                 <form onSubmit={this.handleFormSubmit}>

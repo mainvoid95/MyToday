@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {post} from 'axios' 
-import {RewithRouterdirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import '../App.css';
 import Popup from 'react-popup';
 
@@ -15,7 +15,7 @@ class UserRegister extends Component{
             email:'',
             name:'',
             pass_same:false,
-            open:false,
+            redirecthome:false,
         }
     }
 
@@ -32,15 +32,15 @@ class UserRegister extends Component{
                             className: 'success',
                             action:  () => {
                                 Popup.close();
-                                this.props.stateRefresh('', false);
+                                this.setState({redirecthome: true});
                             },
                         }]
                     }
                 });
-                
             }else if(response.data === 'id_exist'){
                 Popup.alert('이미 등록된 아이디입니다.');
-            }else{
+            }
+            else{
                 Popup.alert('비밀번호를 똑같이 입력해주세요');
             }
         })
@@ -61,12 +61,6 @@ class UserRegister extends Component{
         this.setState(nextState);
     }
 
-    handleClickOpen = () => {
-        this.setState({
-            open:true
-        });
-    }
-
     handleClose = () => {
         this.setState({
             id:'',
@@ -81,14 +75,14 @@ class UserRegister extends Component{
     
     addUser = () => {
         if(this.state.pass !== this.state.pass_confirm){
-            this.setState({pass_same : false});
+            Popup.alert('비밀번호를 똑같이 입력해주세요');
         }else{
             this.setState({pass_same : true});
-            return post('/api/usersRegister', {
+            return post('/api/userRegister', {
                 id: this.state.id,
                 password: String(this.state.pass),
                 email : this.state.email,
-                name : this.state.name
+                name : String(this.state.name),
             }).then((response) =>{
                 return response;
             })
@@ -96,6 +90,10 @@ class UserRegister extends Component{
     }
 
     render(){
+        if(this.state.redirecthome === true){
+            this.setState({redirecthome:false});
+            return <Redirect to='/'></Redirect>
+        }
         return(
             <div className='RegisterForm'>
                 <form onSubmit={this.handleFormSubmit}>

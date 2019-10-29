@@ -55,7 +55,8 @@ app.get('/api/getSession', (req, res) => {
 });
 
 //회원가입 post동작 
-app.post('/api/usersRegister', (req, res) =>{
+app.post('/api/userRegister', (req, res) =>{
+    console.log(req.body.name);
     let input = req.body;
     let sql = 'INSERT INTO user(user_id, user_pass, user_email, user_name) VALUES(?,?,?,?)';
     let id = input.id;
