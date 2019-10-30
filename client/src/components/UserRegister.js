@@ -91,7 +91,6 @@ class UserRegister extends Component{
 
     render(){
         if(this.state.redirecthome === true){
-            this.setState({redirecthome:false});
             return <Redirect to='/'></Redirect>
         }
         return(

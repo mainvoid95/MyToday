@@ -27,6 +27,7 @@ class App extends React.Component{
     }
   }
 
+
   stateRefresh = () => {
     this.setState({
       refreshPage : true,
@@ -39,19 +40,8 @@ class App extends React.Component{
   }
 
 
-  loginStateUpdate = (data) =>{
-    this.setState({
-        // is_logined: data.is_logined,
-        user_id: data.user_id,
-        user_number: data.user_number,
-        user_name: data.user_name,
-        user_email: data.user_email,
-        refreshPage: true,
-    })
-  }
-
   changeUserState = () => {
-    // if(this.state.is_logined === false){
+    if(this.state.is_logined === false){
        get('/api/getSession').then((res) => {
         console.log(" changeuserstate" +res.data);
         if(res.data.is_logined === true){
@@ -73,7 +63,7 @@ class App extends React.Component{
           });
         }
       }).catch(err => console.log(err));
-    // }
+    }
   }
 
   componentDidMount = () =>{
@@ -89,7 +79,7 @@ class App extends React.Component{
     get('/api/logout').then((response)=>{
       this.stateRefresh();
     }).catch((err)=>{
-        console.log(err)
+        console.log(err);
     });
   }
 
@@ -100,17 +90,17 @@ class App extends React.Component{
       content: `아이디 : ${this.state.user_id} \n 이메일 : ${this.state.user_email} \n 이름 : ${this.state.user_name} `,
       buttons: {
           left: [{
-              text: '로그아웃',
-              className: 'danger',
+              text: '닫기',
+              className: '',
               action: () =>{
-                this.logout();
                 Popup.close();
               },
           }],
           right: [ {
-              text: '닫기',
-              className: 'success',
+              text: '로그아웃',
+              className: '',
               action:  () => {
+                this.logout();
                 Popup.close();
               },
           }]
@@ -162,7 +152,7 @@ class App extends React.Component{
               <main className='main'>
                 <Switch>
                   <Route exact path="/" component={Home} />
-                  <Route path='/login' component={() =><Login loginStateUpdate={this.loginStateUpdate} stateRefresh={this.stateRefresh} />} />
+                  <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
                   <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
                   <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
                   <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>

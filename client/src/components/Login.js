@@ -22,6 +22,7 @@ class Login extends Component{
             if(response.data === 'login_fail'){
                 Popup.alert("로그인에 실패했습니다.\n 아이디나 비밀번호를 확인해주세요");
             }else if(response.data === 'login_sucess'){
+                this.props.stateRefresh.bind(this);
                 this.setState({redirecthome:true});
             }else if(response.data === 'pass_is_not_same'){
                 Popup.alert("로그인에 실패했습니다.\n 비밀번호가 다릅니다");
@@ -51,8 +52,7 @@ class Login extends Component{
 
     render(){
         if(this.state.redirecthome === true){
-            this.props.stateRefresh();
-            return <Redirect to='/'></Redirect>
+            return <Redirect to='/'/>
         }
         return(
             <div className='LoginForm'>

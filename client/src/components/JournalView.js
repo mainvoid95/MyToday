@@ -24,8 +24,6 @@ class JournalView extends Component{
         this.getJournalList();
     }
 
-
-
     // 일기 뷰 생성
     makeJournalView = () =>{
         let j = this.state.journals[this.state.journal_view_arr_num];
@@ -65,16 +63,58 @@ class JournalView extends Component{
 
     //일기 지우기 
     handledelJournal = e => {
-        this.setState({
-            del_journal_num: String(e.currentTarget.dataset.num),
+        let num = e.currentTarget.dataset.num;
+        Popup.create({
+            content: `삭제 하시겠습니까?`,
+            buttons: {
+                left: [{
+                    text: '닫기',
+                    className: '',
+                    action: () =>{
+                      Popup.close();
+                    },
+                }],
+                right: [ {
+                    text: '삭제',
+                    className: '',
+                    action:  () => {
+                      Popup.close();
+                        this.setState({
+                            del_journal_num: String(num),
+                            })
+                        console.log(this.state.del_journal_num);
+                        post('/api/journaldel', {
+                            journal_num: this.state.del_journal_num
+                        }).then((response) =>{
+                            this.setState({is_update:false})
+                        })
+                        Popup.create({
+                            content: '삭제되었습니다',
+                            buttons: {
+                                right: [{
+                                    text: '확인',
+                                    action: () =>{
+                                            if(this.state.del_journal_num !== null){
+                                                this.setState({
+                                                    del_journal_num: String(num),
+                                                    })
+                                                console.log(this.state.del_journal_num);
+                                                post('/api/journaldel', {
+                                                    journal_num: this.state.del_journal_num
+                                                }).then((response) =>{
+                                                    this.setState({is_update:false})
+                                                })
+                                            }
+                                            Popup.close();
+                                    }
+                                }]
+                            }
+                        })
+                    },
+                }]
+            }
         })
-        console.log(this.state.del_journal_num);
-        post('/api/journaldel', {
-            journal_num: this.state.del_journal_num
-        }).then((response) =>{
-            console.log(response);
-            this.setState({is_update:false})
-        })
+        
     }
 
     //이전 버튼 클릭시 발생하는 이벤트 journal_view_arr_num감소
@@ -103,12 +143,11 @@ class JournalView extends Component{
 
     render(){
         let view = null;
-        let journal_num = null;
         this.getJournalList();
         if (Object.keys(this.state.journals).length > 0){
             view = this.makeJournalView();
         }else{
-            view = <div key={0}  className='JournalViewBox' >작성된 기록이 없습니다 일기를 작성해주세요 </div>
+            view = <div className='JournalViewBox' >작성된 기록이 없습니다 일기를 작성해주세요 </div>
         }
         return(      
             <div>

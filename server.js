@@ -124,7 +124,6 @@ app.post('/api/journalSaveProcess', (req, res)=>{
     let text = req.body.text;
     text = text.replace(/(?:\r\n|\r|\n)/g, '<br/>');
     let user_number = req.body.user_number;
-    console.log(user_number, text);
     let sql = `INSERT INTO journal (user_number, journal_content) VALUE(?,?)`;
     let params = [user_number, text];
     if(req.session.user_number === user_number){
