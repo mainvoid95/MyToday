@@ -82,7 +82,6 @@ class JournalView extends Component{
                         this.setState({
                             del_journal_num: String(num),
                             })
-                        console.log(this.state.del_journal_num);
                         post('/api/journaldel', {
                             journal_num: this.state.del_journal_num
                         }).then((response) =>{
@@ -94,17 +93,14 @@ class JournalView extends Component{
                                 right: [{
                                     text: '확인',
                                     action: () =>{
-                                            if(this.state.del_journal_num !== null){
                                                 this.setState({
                                                     del_journal_num: String(num),
                                                     })
-                                                console.log(this.state.del_journal_num);
                                                 post('/api/journaldel', {
                                                     journal_num: this.state.del_journal_num
                                                 }).then((response) =>{
                                                     this.setState({is_update:false})
                                                 })
-                                            }
                                             Popup.close();
                                     }
                                 }]
@@ -152,8 +148,8 @@ class JournalView extends Component{
         return(      
             <div>
                 <nav className='JournalViewNav'>
-                    <button className='JournalViewPrev' onClick={this.handleJournalViewPrev}>이전</button>
-                    <button className='JournalViewNext' onClick={this.handleJournalViewNext}>다음</button>
+                    <button className='JournalViewPrev' onClick={this.handleJournalViewPrev}>다음</button>
+                    <button className='JournalViewNext' onClick={this.handleJournalViewNext}>이전</button>
                 </nav> 
                 {view}
             </div>

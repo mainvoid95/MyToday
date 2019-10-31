@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const path = require('path');
 const fs = require('fs');
 const mysql = require('mysql'); // mysql 모듈
 const bcrypt = require('bcrypt'); //암호화 모듈
@@ -14,6 +15,12 @@ const sessionDataJson = fs.readFileSync('./session.json'); //세션 데이터
 const sessionSecret = JSON.parse(sessionDataJson); //세션 데이터에는 시크릿키가 들어있음
 
 const port = process.env.PORT || 5000;
+
+//리엑트에서 빌드한 파일들을 정적으로 호출 (리엑트 개발할떈 포트 3000, 이건 5000)
+app.use(express.static(path.join(__dirname, 'client/build')));
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,7 +63,6 @@ app.get('/api/getSession', (req, res) => {
 
 //회원가입 post동작 
 app.post('/api/userRegister', (req, res) =>{
-    console.log(req.body.name);
     let input = req.body;
     let sql = 'INSERT INTO user(user_id, user_pass, user_email, user_name) VALUES(?,?,?,?)';
     let id = input.id;
@@ -175,6 +181,15 @@ app.post('/api/journalupdate', (req, res)=>{
     })
 });
 
+//회원 탈퇴
+app.post('/api/userbackout', (req, res)=>{
+    let sql = 'DELETE FROM user WHERE user_number = ?';
+    let user_number = req.body.user_number;
+    let params = [user_number];
+    db.query(sql, params, (err, dbresult, fields)=>{
+        res.send('');
+    })
+})
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -240,7 +240,13 @@ textarea::placeholder{
 }
 
 .GithubImg{
-  width: auto;
+  width: 35px;
+  height: auto;
+  margin-left: 10px;
+}
+
+.mailImg{
+    width: 35px;
   height: auto;
   margin-left: 10px;
 }
@@ -323,6 +329,9 @@ textarea::placeholder{
 
     .GithubImg{
       filter: invert();
+    }
+    .mailImg{
+         filter: invert();
     }
 
     .JournalViewBox{

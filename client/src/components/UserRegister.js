@@ -22,7 +22,6 @@ class UserRegister extends Component{
     handleFormSubmit = (e) =>{
         e.preventDefault()
         this.addUser().then((response)=>{
-            console.log(response.data);
             if(response.data === 'register_success'){
                 Popup.create({
                     content: `회원가입이 완료되었습니다.`,

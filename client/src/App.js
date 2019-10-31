@@ -12,6 +12,7 @@ import UserInfoUpdate from './components/UserInfoUpdate';
 import NotFound from './components/NotFound';
 import Popup from 'react-popup';
 import github from './GitHub.png';
+import mail from './mail.png';
 
 
 class App extends React.Component{
@@ -43,7 +44,6 @@ class App extends React.Component{
   changeUserState = () => {
     if(this.state.is_logined === false){
        get('/api/getSession').then((res) => {
-        console.log(" changeuserstate" +res.data);
         if(res.data.is_logined === true){
           this.setState({
             is_logined: res.data.is_logined,
@@ -164,7 +164,8 @@ class App extends React.Component{
               </main>
             </div>
                 <footer className='Mainfooter'>
-                  <a href="https://github.com/mainvoid95/MyToday"><img src={github}className='GithubImg' /></a>
+                    <a href="mailto:mainvoid95@gmail.com?Subject=문의사항" target="_top"><img src={mail} className='mailImg'/></a>
+                    <a href="https://github.com/mainvoid95/MyToday"><img src={github}className='GithubImg' /></a>
                 </footer>
           </Router>
       </div>

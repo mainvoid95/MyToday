@@ -27,7 +27,6 @@ class Journal extends Component{
                 user_number: this.props.user_number,
                 text: this.state.text
             }).then((response) =>{
-                console.log(response);
             })
         )
     }

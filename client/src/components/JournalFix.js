@@ -19,7 +19,6 @@ class JournalFix extends Component{
         }, () =>{
         post('/api/journalcontentget',{journal_num:this.state.journal_num}
         ).then((response) => {
-            console.log(response);
             let text = response.data[0].journal_content;
             text = text.replace(/<br\/>/gi , "\r\n");
             this.setState({
