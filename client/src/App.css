@@ -421,16 +421,12 @@ textarea::placeholder{
       z-index: 9999;
   }
 
-  .mm-popup__btn--success {
-      background-color: #333;
-      color: #fff;
-      z-index: 9999;
+  .mm-popup__btn--leftclose {
+      width: 90%;
   }
 
-  .mm-popup__btn--danger {
-      background-color: #333;
-      color: #fff;
-      z-index: 9999;
+  .mm-popup__btn--closeaccount{
+    width: 40% !important;
   }
 
   .mm-popup__box {
@@ -555,6 +551,7 @@ textarea::placeholder{
     margin-left: 0px;
   }
 
+
   input{
     text-align: left;
     border: none;
@@ -582,6 +579,10 @@ textarea::placeholder{
       width: 100px;
       margin-top: 10px;
   }
+
+  .mm-popup__btn--leftclose {
+    width: 90%;
+}
 
   .mm-popup__box__footer {
       padding-top: 30px;
@@ -654,6 +655,10 @@ textarea::placeholder{
       margin-top: 10px;
   }
 
+  .mm-popup__btn--leftclose {
+    width: 90%;
+}
+
   .mm-popup__box__footer {
       padding-top: 30px;
   }
@@ -694,6 +699,10 @@ textarea::placeholder{
       width: 100px;
       margin-top: 10px;
   }
+
+  .mm-popup__btn--leftclose {
+    width: 90%;
+}
 
   .mm-popup__box__footer {
       padding-top: 30px;

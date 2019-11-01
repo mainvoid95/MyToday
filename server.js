@@ -14,9 +14,9 @@ const dbconf = JSON.parse(dbdata); //파일에서 정보 불러옴
 const sessionDataJson = fs.readFileSync('./session.json'); //세션 데이터
 const sessionSecret = JSON.parse(sessionDataJson); //세션 데이터에는 시크릿키가 들어있음
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 80; // http의 포트가 80포트라 80포트로 설정 그래야 접속시에 뒤에 포트번호가 안붙음
 
-//리엑트에서 빌드한 파일들을 정적으로 호출 (리엑트 개발할떈 포트 3000, 이건 5000)
+//리엑트에서 빌드한 파일들을 정적으로 호출 (리엑트 개발할떈 포트 3000)
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
@@ -104,7 +104,7 @@ app.post('/api/login', (req, res) =>{
                     req.session.user_id = dbresult[0].user_id;
                     req.session.user_name = dbresult[0].user_name;
                     req.session.user_email = dbresult[0].user_email;
-                    res.send('login_sucess');
+                    res.send('login_success');
                 }else{
                     res.send('pass_is_not_same');
                 }
@@ -182,12 +182,13 @@ app.post('/api/journalupdate', (req, res)=>{
 });
 
 //회원 탈퇴
-app.post('/api/userbackout', (req, res)=>{
+app.post('/api/closeaccount', (req, res)=>{
     let sql = 'DELETE FROM user WHERE user_number = ?';
     let user_number = req.body.user_number;
     let params = [user_number];
+    console.log(user_number);
     db.query(sql, params, (err, dbresult, fields)=>{
-        res.send('');
+        res.send('success');
     })
 })
 

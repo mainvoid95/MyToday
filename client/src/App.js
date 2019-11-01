@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Redirect, Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import './App.css';
-import {get} from 'axios';
+import {get, post} from 'axios';
 import Home from './components/Home';
 import UsersRegister from './components/UserRegister';
 import Login from './components/Login';
@@ -83,6 +83,27 @@ class App extends React.Component{
     });
   }
 
+  closeaccount = () =>{
+    post('/api/closeaccount',{user_number: this.state.user_number}).then(
+        (response) => {
+            if(response.data === 'success'){
+                Popup.create({
+                    content:'탈퇴 왼료되었습니다.\n 이용해주셔서 감사합니다',
+                    buttons:{
+                        right:[{
+                            text:'닫기',
+                            action: () =>{
+                                this.logout();
+                            }
+                        }]
+                    }
+                })
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+  }
+
   //유저 정보 팝업 함수
   userInfoPopup = () => {
     Popup.create({
@@ -91,12 +112,21 @@ class App extends React.Component{
       buttons: {
           left: [{
               text: '닫기',
-              className: '',
+              className: 'leftclose',
               action: () =>{
                 Popup.close();
               },
           }],
-          right: [ {
+          right: [ 
+            {
+                text: '회원탈퇴',
+                className: 'closeaccount',
+                action: () =>{
+                    Popup.close();
+                    this.closeaccount();
+                },
+            },  
+            {
               text: '로그아웃',
               className: '',
               action:  () => {
