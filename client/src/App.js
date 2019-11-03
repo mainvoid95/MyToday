@@ -10,6 +10,7 @@ import JouranlView from './components/JournalView';
 import JournalFix from './components/JournalFix';
 import UserInfoUpdate from './components/UserInfoUpdate';
 import NotFound from './components/NotFound';
+import Clock from './components/Clock';
 import Popup from 'react-popup';
 import github from './GitHub.png';
 import mail from './mail.png';
@@ -177,6 +178,9 @@ class App extends React.Component{
           <Router>
             <header>
               {this.loginedNav()}
+                <nav className='clocknav'>
+                    <Clock/>
+                </nav>
             </header>
             <div className='warp'>
               <main className='main'>

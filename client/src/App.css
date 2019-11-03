@@ -31,9 +31,22 @@ html{
   margin-left: 10px;
   margin-right: 10px;
   padding-bottom: 10px;
+  /* width: 100%; */
+}
+
+.clocknav{
+    color: --color-white;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 10px;
   border-bottom: 1px solid;
   border-color: --color-white;
   /* width: 100%; */
+}
+
+.clock{
+    margin-left: 10px;
+    padding-left: 10px;
 }
 
 .nav a:visited{
@@ -209,11 +222,12 @@ button:hover {
 .JournalEdit {
   font-size: 15px;
   width: 80%;
-  min-height: 20em;
-  max-height: 20em;
+  min-height: 23em;
+  max-height: 90%;
   margin-right: auto;
   margin-left: auto;
   border: none;
+  resize: none;
 }
 
 textarea::placeholder{
@@ -293,11 +307,16 @@ textarea::placeholder{
       transition: 0.3s;
       
     }
-    
-    .nav{
-      border-bottom: 1px solid;
+
+    .clocknav{
+        border-bottom: 1px solid;
       border-color: white;
     }
+
+    .clocknav a{
+        color: white;
+        text-decoration: none !important;
+      }
 
     .nav a:visited{
       color: white;
@@ -543,14 +562,15 @@ textarea::placeholder{
   .JournalViewBoxDate{
     position: relative;
     left:0px;
-    margin-right: 100px !important;
+    margin-left: 0px;
+    margin-right: 30px !important;
     /* padding: 10px; */
   }
 
   .JournalViewBoxFix{
+      left: 0px;
     margin-left: 0px;
   }
-
 
   input{
     text-align: left;
@@ -606,6 +626,12 @@ textarea::placeholder{
     font-size: 15px;
   }
   .nav{
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-bottom: 10px;
+  }
+
+  .clocknav{
     margin-left: 0px;
     margin-right: 0px;
     padding-bottom: 10px;

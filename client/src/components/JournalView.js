@@ -31,10 +31,10 @@ class JournalView extends Component{
                 <div className='JournalViewBox'>
                     <nav className='JournalViewBoxNav'>
                         <a className='JournalViewBoxDate'>{j.journal_create_date}</a>
-                        <Link  className='JournalViewBoxFix' to={`/journalfix/${j.journal_num}`}><a className='JournalViewBoxFix'>수정하기</a></Link>
+                        <Link  className='JournalViewBoxFix' to={`/journalfix/${j.journal_num}`}><a className='JournalViewBoxFix'>수정</a></Link>
                         <a className='JournalViewBoxDel' data-num={j.journal_num} onClick={
                             this.handledelJournal.bind(this)
-                        }>삭제하기</a>
+                        }>삭제</a>
                     </nav>
                     <div className='JournalViewBoxContent' dangerouslySetInnerHTML={ {__html: j.journal_content} }/>
                 </div>
