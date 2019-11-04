@@ -2,7 +2,7 @@ const proxy = require('http-proxy-middleware');
 module.exports = function(app) {
     app.use(proxy('/api/*', 
         { 
-            target: 'http://localhost:80/',
+            target: 'https://localhost:443/',
             headers: {
                 "Connection": "keep-alive"
             }, 

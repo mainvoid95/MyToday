@@ -10,7 +10,6 @@ const session = require('express-session'); //세션 미들웨어
 const sessionFileStore = require('session-file-store')(session);
 const greenlock = require('greenlock-express');
 const https = require('https');
-const http = require('http');
 
 const dbdata = fs.readFileSync('./database.json'); //데이터 베이스 관련 저장된 파일
 const dbconf = JSON.parse(dbdata); //파일에서 정보 불러옴
@@ -44,7 +43,7 @@ const db = mysql.createConnection({
     user: dbconf.user,
     password: dbconf.password,
     database: dbconf.database,
-});
+})
 db.connect();
 
 
@@ -87,7 +86,7 @@ app.post('/api/userRegister', (req, res) =>{
             }
         })
     });
-});
+})
 
 //로그인 api
 app.post('/api/login', (req, res) =>{
@@ -116,7 +115,7 @@ app.post('/api/login', (req, res) =>{
             res.send('login_fail');
         }
     });
-});
+})
 
 app.get('/api/logout', (req, res)=>{
     req.session.destroy(function(err){
@@ -145,11 +144,11 @@ app.post('/api/journalSaveProcess', (req, res)=>{
 //저장된 일기 불러오기
 app.get('/api/journalview', (req, res) =>{
     let sql = `SELECT journal_num, journal_create_date, journal_fix_date, journal_content FROM journal WHERE user_number = ? ORDER BY journal_num DESC `;
-    let user_number = req.session.user_number;
+    let user_number = req.session.user_number
     let params = [user_number];
     db.query(sql, params, (err, dbresult, fields) => {
         res.send(dbresult);
-    });
+    })
 });
 
 //일기 삭제
@@ -160,7 +159,7 @@ app.post('/api/journaldel', (req, res)=>{
     db.query(sql, params, (err, dbresult, fields)=>{
         res.send('');
     })
-});
+})
 
 //일기 수정을 위한 기존 일기 데이터 가져오기
 app.post('/api/journalcontentget', (req, res) =>{
@@ -170,7 +169,7 @@ app.post('/api/journalcontentget', (req, res) =>{
     db.query(sql, params, (err, dbresult, fields)=>{
         res.send(dbresult);
     })
-});
+})
 
 //일기 수정하기
 app.post('/api/journalupdate', (req, res)=>{
@@ -181,7 +180,7 @@ app.post('/api/journalupdate', (req, res)=>{
     let params = [text, journal_num];
     db.query(sql, params, (err, dbresult, fields) => {
         res.send('');
-    });
+    })
 });
 
 //회원 탈퇴
@@ -192,32 +191,8 @@ app.post('/api/closeaccount', (req, res)=>{
     console.log(user_number);
     db.query(sql, params, (err, dbresult, fields)=>{
         res.send('success');
-    });
-});
+    })
+})
 
-
-const lex = require('greenlock-express').create({
-    version: 'draft-11', // 버전2
-    configDir: '/etc/letsencrypt', //letsencrypt가 설치된 경로
-    server: 'https://acme-v02.api.letsencrypt.org/directory',
-    // server: 'https://acme-staging-v02.api.letsencrypt.org/directory', 테스트시에는 이코드를 사용할것 (배포할땐 X) 
-    approveDomains: (opts, certs, cb) => {
-      if (certs) {
-        opts.domains = ['mytoday.ml', 'www.mytoday.ml'];
-      } else {
-        opts.email = 'mainvoid95@gmail.com';
-        opts.agreeTos = true;
-      }
-      cb(null, { options: opts, certs });
-    },
-    renewWithin: 81 * 24 * 60 * 60 * 1000,
-    renewBy: 80 * 24 * 60 * 60 * 1000,
-  });
-
-
-// app.listen(port, () => console.log(`Listening on port ${port}`));
-
-https.createServer(lex.httpsOptions, lex.middleware(app)).listen(443);
-http.createServer(lex.middleware(require('redirect-https')())).listen(80);
 
 

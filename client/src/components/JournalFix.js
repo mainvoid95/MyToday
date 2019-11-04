@@ -12,7 +12,7 @@ class JournalFix extends Component{
             }
     }
 
-
+    //컴포넌트가 마운트 될때 데이터베이스에서 수정하려는 일기를 가져온다
     componentDidMount = () =>{        
         this.setState({
             journal_num : this.props.match.params.journalnum
@@ -28,7 +28,7 @@ class JournalFix extends Component{
         
     }
 
-
+    //폼에서 서밋할때 동작하는 함수
     handleFormSubmit = (e) => {
         e.preventDefault();
         this.journalSaveProcess().then((response)=>{
@@ -36,6 +36,7 @@ class JournalFix extends Component{
         });
     }
     
+    //일기를 api를 이용해 다시 저장한다
     journalSaveProcess = () => {
         return (
             post('/api/journalupdate', {

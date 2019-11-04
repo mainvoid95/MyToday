@@ -8,11 +8,12 @@ class Clock extends React.Component{
         }
     }
 
+    //컴포넌트가 마운트 될때 1초간격으로 시간을 갱신함
     componentDidMount = () =>{
         this.timeid = setInterval(()=> this.getTime(), 1000);
     }
     
-    componentWillUnmount =() => { //종료되면 반복하는것도 클리어시키기
+    componentWillUnmount =() => { 
         clearInterval(this.timeID)
     }
 
@@ -20,9 +21,9 @@ class Clock extends React.Component{
         this.setState({
             today: new Date(),
         })
-        
     }
 
+    //날자나 시간이 1자리수일경우 앞에 0을추가함
     make2num=(input) => {
         input = String(input);
         if(input.length === 1){

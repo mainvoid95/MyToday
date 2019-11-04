@@ -4,6 +4,9 @@ import '../App.css';
 import Popup from 'react-popup';
 
 
+// to-do
+// 유저 정보 업데이트 하는 페이지
+
 class UserInfoUpdate extends Component{
     constructor(props){
         super(props);

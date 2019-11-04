@@ -19,6 +19,8 @@ class UserRegister extends Component{
         }
     }
 
+    //폼에서 서밋을 누를경우 처리하는 함수
+    //addUser함수에서 처리한 post값의 리턴값으로 팝업을 띄운다.
     handleFormSubmit = (e) =>{
         e.preventDefault()
         this.addUser().then((response)=>{
@@ -54,6 +56,7 @@ class UserRegister extends Component{
         })
     }
 
+    //input태그의 값이 변경될경우 그것을 실시간으로 반영한다
     handleValueChange = (e) => {
         let nextState = {};
         nextState[e.target.name] = e.target.value;
@@ -72,6 +75,7 @@ class UserRegister extends Component{
         })
     }
     
+    // 비밀번호가 똑같이 입력되었는지 확인한뒤 동일하면 api로 db에 유저정보를 저장한다.
     addUser = () => {
         if(this.state.pass !== this.state.pass_confirm){
             Popup.alert('비밀번호를 똑같이 입력해주세요');
@@ -90,7 +94,7 @@ class UserRegister extends Component{
 
     render(){
         if(this.state.redirecthome === true){
-            return <Redirect to='/'></Redirect>
+            return <Redirect to='/'></Redirect>  
         }
         return(
             <div className='RegisterForm'>
