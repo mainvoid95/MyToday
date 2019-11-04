@@ -7,16 +7,13 @@ class Weather extends React.Component{
         super(props)
         this.state ={
             temp: '',
-            Weather: '',
-            cityname: '',
+            weather: '',
         }
     }
 
     weatherApi = axios.create({
         baseURL: 'https://api.openweathermap.org/data/2.5',
-        params: {
-            APPID: '9bf1118397af33b243c4d2efd6a0ebb5'
-        }
+        
     });
 
     componentDidMount = () => {
@@ -28,6 +25,7 @@ class Weather extends React.Component{
                   params: {
                       lat: position.coords.latitude,
                       lon: position.coords.longitude,
+                      APPID: '9bf1118397af33b243c4d2efd6a0ebb5',
                   },
               },
               err => console.log(err)
@@ -36,18 +34,35 @@ class Weather extends React.Component{
               .then(res => {
                   this.setState({
                       temp: Math.ceil(res.data.main.temp - 273.15), // 온도(섭씨온도 계산)
-                      Weather: res.data.weather[0].main, // 날씨
-                      cityname: res.data.name, // 지역
+                      weather: res.data.weather[0].main, // 날씨
                   });
               })
               .catch(err => console.log(err));
       });
     }
 
+    temploading = (input) => {
+        if(input !== ""){
+            input = String(input) + "℃";
+        }
+        return input;
+    }
+
+    weathertokorean = (input) => {
+        if(input === 'Clear'){input = '맑음';}
+        else if(input === 'Mist' || input === 'Fog' ){input = '안개'}
+        else if(input === 'Snow'){input = '눈'}
+        else if(input === 'Rain'){input = '비'}
+        else if(input === 'Drizzle'){input = '이슬비'}       
+        else if(input === 'Clouds'){input = '구름낌'}
+        else if(input === 'Thunderstorm'){input = '천둥번개'}
+        return input;
+    }
+
     render(){
         return(
-            <a>
-                {this.state.temp} {this.state.weather} {this.state.cityname}
+            <a className='weather'>
+                {this.weathertokorean(this.state.weather)} {this.temploading(this.state.temp)}
             </a>
         )
     }

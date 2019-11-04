@@ -49,6 +49,12 @@ html{
     padding-left: 10px;
 }
 
+.weather{
+    float: right;
+    margin-right: 30px;
+    margin-left: 10px;
+}
+
 .nav a:visited{
   color: --color-white;
   text-decoration: none !important;
@@ -218,7 +224,6 @@ button:hover {
   text-decoration: none;
 }
 
-/* 저널 에디터의 크기 조절 */
 .JournalEdit {
   font-size: 15px;
   width: 80%;
@@ -254,13 +259,13 @@ textarea::placeholder{
 }
 
 .GithubImg{
-  width: 35px;
+  width: 20px;
   height: auto;
   margin-left: 10px;
 }
 
 .mailImg{
-    width: 35px;
+    width: 20px;
   height: auto;
   margin-left: 10px;
 }

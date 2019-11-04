@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -8,7 +9,7 @@ const bcrypt = require('bcrypt'); //암호화 모듈
 const saltRounds = 10; //암호화 solt값 설정
 const session = require('express-session'); //세션 미들웨어
 const sessionFileStore = require('session-file-store')(session);
-const greenlock = require('greenlock-express');
+// const greenlock = require('greenlock-express');
 const https = require('https');
 const http = require('http');
 
@@ -19,6 +20,24 @@ const sessionSecret = JSON.parse(sessionDataJson); //세션 데이터에는 시�
 
 const port = process.env.PORT || 443; // http의 포트가 80포트라 80포트로 설정 그래야 접속시에 뒤에 포트번호가 안붙음
 
+
+// const lex = require('greenlock-express').create({
+//     version: 'draft-11', // 버전2
+//     configDir: '/etc/letsencrypt', //letsencrypt가 설치된 경로
+//     server: 'https://acme-v02.api.letsencrypt.org/directory',
+//     // server: 'https://acme-staging-v02.api.letsencrypt.org/directory', 테스트시에는 이코드를 사용할것 (배포할땐 X) 
+//     approveDomains: (opts, certs, cb) => {
+//       if (certs) {
+//         opts.domains = ['mytoday.ml', 'www.mytoday.ml'];
+//       } else {
+//         opts.email = 'mainvoid95@gmail.com';
+//         opts.agreeTos = true;
+//       }
+//       cb(null, { options: opts, certs });
+//     },
+//     renewWithin: 81 * 24 * 60 * 60 * 1000,
+//     renewBy: 80 * 24 * 60 * 60 * 1000,
+//   });
 
 //리엑트에서 빌드한 파일들을 정적으로 호출 (리엑트 개발할떈 포트 3000)
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -196,28 +215,24 @@ app.post('/api/closeaccount', (req, res)=>{
 });
 
 
-const lex = require('greenlock-express').create({
-    version: 'draft-11', // 버전2
-    configDir: '/etc/letsencrypt', //letsencrypt가 설치된 경로
+
+require('greenlock-express').create({
+    version: 'draft-11',
+    configDir: '/etc/letsencrypt/',
     server: 'https://acme-v02.api.letsencrypt.org/directory',
-    // server: 'https://acme-staging-v02.api.letsencrypt.org/directory', 테스트시에는 이코드를 사용할것 (배포할땐 X) 
-    approveDomains: (opts, certs, cb) => {
-      if (certs) {
-        opts.domains = ['mytoday.ml', 'www.mytoday.ml'];
-      } else {
-        opts.email = 'mainvoid95@gmail.com';
-        opts.agreeTos = true;
-      }
-      cb(null, { options: opts, certs });
-    },
+    email: 'mainvoid95@gmail.com',
+    agreeTos: true,
+    approvedDomains: ['mytoday.ml', 'www.mytoday.ml'],
+    app,
     renewWithin: 81 * 24 * 60 * 60 * 1000,
     renewBy: 80 * 24 * 60 * 60 * 1000,
-  });
+  }).listen(80, 443);
+
 
 
 // app.listen(port, () => console.log(`Listening on port ${port}`));
 
-https.createServer(lex.httpsOptions, lex.middleware(app)).listen(443);
-http.createServer(lex.middleware(require('redirect-https')())).listen(80);
+// https.createServer(lex.httpsOptions, lex.middleware(app)).listen(443);
+// http.createServer(lex.middleware(require('redirect-https')())).listen(80);
 
 
