@@ -1,6 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
+const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
 const mysql = require('mysql'); // mysql 모듈
@@ -8,10 +8,8 @@ const bcrypt = require('bcrypt'); //암호화 모듈
 const saltRounds = 10; //암호화 solt값 설정
 const session = require('express-session'); //세션 미들웨어
 const sessionFileStore = require('session-file-store')(session);
-// const greenlock = require('greenlock-express');
 const https = require('https');
 const http = require('http');
-
 
 const dbdata = fs.readFileSync('./database.json'); //데이터 베이스 관련 저장된 파일
 const dbconf = JSON.parse(dbdata); //파일에서 정보 불러옴
@@ -19,7 +17,6 @@ const sessionDataJson = fs.readFileSync('./session.json'); //세션 데이터
 const sessionSecret = JSON.parse(sessionDataJson); //세션 데이터에는 시크릿키가 들어있음
 
 //const port = process.env.PORT || 443; // http의 포트가 80포트라 80포트로 설정 그래야 접속시에 뒤에 포트번호가 안붙음
-
 
 const lex = require('greenlock-express').create({
     version: 'draft-11', // 버전2
@@ -39,14 +36,15 @@ const lex = require('greenlock-express').create({
     renewBy: 80 * 24 * 60 * 60 * 1000,
   });
 
-//리엑트에서 빌드한 파일들을 정적으로 호출 (리엑트 개발할떈 포트 3000)
+//웹팩으로 번들화시킨 정적 리엑트파일을 웹페이지 로드시 출력시킴
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 //세션 사용
 app.use(session({
@@ -65,7 +63,6 @@ const db = mysql.createConnection({
     database: dbconf.database,
 });
 db.connect();
-
 
 //세션데이터를 react로 보내기위한 get동작
 app.get('/api/getSession', (req, res) => {
@@ -91,7 +88,7 @@ app.post('/api/userRegister', (req, res) =>{
     let email = input.email;
     let name = input.name;
     let pass = input.password;
-    //비밀번호는 암호화해서 db에 저장함
+    //비밀번호는 bcrypt를 이용해서 단방향 암호화해서 db에 저장함
     bcrypt.hash(pass, saltRounds, function(err, hash){
         let pass = hash;
         let params = [id, pass, email, name];
