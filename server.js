@@ -43,8 +43,8 @@ app.get('/', function(req, res) {
 });
 
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //세션 사용
 app.use(session({
