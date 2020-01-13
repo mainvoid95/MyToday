@@ -11,8 +11,6 @@ const sessionFileStore = require('session-file-store')(session);
 // const greenlock = require('greenlock-express');
 const https = require('https');
 const http = require('http');
-const socketio = require('socket.io');
-const io = socketio.listen(https);
 
 
 const dbdata = fs.readFileSync('./database.json'); //데이터 베이스 관련 저장된 파일
@@ -216,7 +214,6 @@ app.post('/api/closeaccount', (req, res)=>{
     });
 });
 
-
 // require('greenlock-express').create({
 //     version: 'draft-11',
 //     configDir: '/etc/letsencrypt/',
@@ -229,16 +226,7 @@ app.post('/api/closeaccount', (req, res)=>{
 //     renewBy: 80 * 24 * 60 * 60 * 1000,
 //   }).listen(80, 443);
 
-
-io.on('connection', function(socket){
-    console.log('a user connected');
-  });
-
-
 //app.listen(port, () => console.log(`Listening on port ${port}`));
 
 https.createServer(lex.httpsOptions, lex.middleware(app)).listen(443);
 http.createServer(lex.middleware(require('redirect-https')())).listen(80);
-
-
-
