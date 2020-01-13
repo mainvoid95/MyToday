@@ -12,7 +12,6 @@ import UserInfoUpdate from './components/UserInfoUpdate';
 import NotFound from './components/NotFound';
 import Clock from './components/Clock';
 import Weather from './components/Weather';
-import Socket from './components/Socket';
 import Popup from 'react-popup';
 import github from './GitHub.png';
 import mail from './mail.png';
@@ -195,7 +194,7 @@ class App extends React.Component{
                   <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>
                   <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
                   <Route path="/userinfoupdate" component={()=> <UserInfoUpdate user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
-	    	  <Route component={NotFound}/>
+                  <Route component={NotFound}/>
                 </Switch>
                 <Popup />
               </main>

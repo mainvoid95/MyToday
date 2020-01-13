@@ -7,6 +7,7 @@ function Home(){
             <p>간단하게</p>
             <p>쓰고</p>
             <p>보자</p>
+            test
         </div>
     )
 }
