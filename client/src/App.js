@@ -192,7 +192,6 @@ class App extends React.Component{
                   <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
                   <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>
                   <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
-                  <Route path="/userinfoupdate" component={()=> <UserInfoUpdate user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
 	    	  <Route component={NotFound}/>
                 </Switch>
                 <Popup />
