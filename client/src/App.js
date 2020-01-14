@@ -12,7 +12,6 @@ import UserInfoUpdate from './components/UserInfoUpdate';
 import NotFound from './components/NotFound';
 import Clock from './components/Clock';
 import Weather from './components/Weather';
-import Socket from './components/Socket';
 import Popup from 'react-popup';
 import github from './GitHub.png';
 import mail from './mail.png';
@@ -91,7 +90,7 @@ class App extends React.Component{
         (response) => {
             if(response.data === 'success'){
                 Popup.create({
-                    content:'탈퇴 왼료되었습니다.\n 이용해주셔서 감사합니다',
+                    content:'탈퇴 완료되었습니다.\n 이용해주셔서 감사합니다',
                     buttons:{
                         right:[{
                             text:'닫기',

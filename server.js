@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs'); 
 const mysql = require('mysql'); // mysql 모듈
 const bcrypt = require('bcrypt'); //암호화 모듈
 const saltRounds = 10; //암호화 solt값 설정
 const session = require('express-session'); //세션 미들웨어
-const sessionFileStore = require('session-file-store')(session);
+const sessionFileStore = require('session-file-store')(session); //세션을 파일로 저장하는 모듈
 const https = require('https');
 const http = require('http');
 
@@ -15,8 +15,6 @@ const dbdata = fs.readFileSync('./database.json'); //데이터 베이스 관련 
 const dbconf = JSON.parse(dbdata); //파일에서 정보 불러옴
 const sessionDataJson = fs.readFileSync('./session.json'); //세션 데이터
 const sessionSecret = JSON.parse(sessionDataJson); //세션 데이터에는 시크릿키가 들어있음
-
-//const port = process.env.PORT || 443; // http의 포트가 80포트라 80포트로 설정 그래야 접속시에 뒤에 포트번호가 안붙음
 
 const lex = require('greenlock-express').create({
     version: 'draft-11', // 버전2
@@ -210,20 +208,6 @@ app.post('/api/closeaccount', (req, res)=>{
         res.send('success');
     });
 });
-
-// require('greenlock-express').create({
-//     version: 'draft-11',
-//     configDir: '/etc/letsencrypt/',
-//     server: 'https://acme-v02.api.letsencrypt.org/directory',
-//     email: 'mainvoid95@gmail.com',
-//     agreeTos: true,
-//     approvedDomains: ['mytoday.ml', 'www.mytoday.ml'],
-//     app,
-//     renewWithin: 81 * 24 * 60 * 60 * 1000,
-//     renewBy: 80 * 24 * 60 * 60 * 1000,
-//   }).listen(80, 443);
-
-//app.listen(port, () => console.log(`Listening on port ${port}`));
 
 https.createServer(lex.httpsOptions, lex.middleware(app)).listen(443);
 http.createServer(lex.middleware(require('redirect-https')())).listen(80);
