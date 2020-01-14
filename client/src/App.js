@@ -8,7 +8,6 @@ import Login from './components/Login';
 import Jouranl from './components/Journal';
 import JouranlView from './components/JournalView';
 import JournalFix from './components/JournalFix';
-import UserInfoUpdate from './components/UserInfoUpdate';
 import NotFound from './components/NotFound';
 import Clock from './components/Clock';
 import Weather from './components/Weather';

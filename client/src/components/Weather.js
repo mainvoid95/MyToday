@@ -13,13 +13,11 @@ class Weather extends React.Component{
 
     weatherApi = axios.create({
         baseURL: 'https://api.openweathermap.org/data/2.5',
-        
     });
 
     componentDidMount = () => {
         navigator.geolocation.getCurrentPosition(position => {
-            console.log(position);
-            // api 추가 파라미터로 latitude, longitude 추가
+        // api 추가 파라미터로 latitude, longitude 추가
           const getWeather = this.weatherApi.get('/weather',
               {
                   params: {
@@ -47,7 +45,7 @@ class Weather extends React.Component{
         }
         return input;
     }
-
+    
     weathertokorean = (input) => {
         if(input === 'Clear'){input = '맑음';}
         else if(input === 'Mist' || input === 'Fog' ){input = '안개'}
