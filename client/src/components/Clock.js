@@ -35,7 +35,7 @@ class Clock extends React.Component{
     render(){
         return(
             <a className='clock'>
-                {this.state.today.getFullYear()}-{this.state.today.getMonth() + 1}-{this.make2num(this.state.today.getDate())} {this.make2num(this.state.today.getHours())}:{this.make2num(this.state.today.getMinutes())}:{this.make2num(this.state.today.getSeconds())}
+                {this.state.today.getFullYear()}-{this.make2num(this.state.today.getMonth()) + 1}-{this.make2num(this.state.today.getDate())} {this.make2num(this.state.today.getHours())}:{this.make2num(this.state.today.getMinutes())}:{this.make2num(this.state.today.getSeconds())}
             </a>
         )
     }
