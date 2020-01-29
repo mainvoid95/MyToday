@@ -201,9 +201,9 @@ class App extends React.Component{
                 <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
 	    	        <Route component={NotFound}/>
           </Switch>
+          <Popup />
           </Router>
-                <Popup />
-                </Content>
+          </Content>
       </Layout>
       <Footer>
         <a href="mailto:mainvoid95@gmail.com?Subject=문의사항" target="_top"><img src={mail} className='mailImg'/></a>
