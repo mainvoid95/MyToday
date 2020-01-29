@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect, Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import './App.css';
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import {get, post} from 'axios';
 import Home from './components/Home';
 import UsersRegister from './components/UserRegister';
@@ -174,7 +175,8 @@ class App extends React.Component{
       )
     }
     return(
-      <div>
+      <Layout>
+        <div>
           <Router>
             <header>
               {this.loginedNav()}
@@ -203,6 +205,8 @@ class App extends React.Component{
                 </footer>
           </Router>
       </div>
+      </Layout>
+      
     )
   }
 }
