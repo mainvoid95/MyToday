@@ -152,43 +152,59 @@ class App extends React.Component{
   });
   } 
 
-  // //네비게이터 
-  // loginedNav=()=>{
-  //   let nav = null;
-  //   if(this.state.is_logined === true){
-  //     nav = ( 
-  //       <Menu.Item key="1">
-  //             {/* <Icon type="pie-chart" /> */}
-  //             <span><a className='userinfo' onClick={this.userInfoPopup}>{this.state.user_name}</a><br/></span>
-  //           </Menu.Item>
-  //       <SubMenu
-  //         key="sub1"
-  //         title={
-  //           <span>
-  //             <Icon type="user" />
-  //             <span>일기</span>
-  //           </span>
-  //         }
-  //       >
-  //         <Menu.Item key="3"><Link to="/journal">쓰기</Link></Menu.Item>
-  //         <Menu.Item key="4"><Link to='/jouranlview'>기록</Link></Menu.Item>
-  //         {/* <Menu.Item key="5">Alex</Menu.Item> */}
-  //       </SubMenu>
-  //     )
-  //   }else{
-  //     nav =(
-  //       <Menu.Item key="1">
-  //             {/* <Icon type="pie-chart" /> */}
-  //             <span><Link to="/userRegister">회원가입</Link></span>
-  //           </Menu.Item>
-  //           <Menu.Item key="2">
-  //             {/* <Icon type="desktop" /> */}
-  //             <span><Link to="/login">로그인</Link></span>
-  //       </Menu.Item>
-  //     )
-  //   }
-  //   return nav
-  // }
+  //네비게이터 
+  loginedNav=()=>{
+    let nav = null;
+    if(this.state.is_logined === true){
+      nav = ( 
+        <div>
+          <Menu.Item key="1">
+          <Icon type="user" />
+          <a className='userinfo' onClick={this.userInfoPopup}>{this.state.user_name}</a><br/> 
+        </Menu.Item>
+        <SubMenu
+          key="sub1"
+          title={
+            <span>
+              <Icon type="read" />
+              <span>일기</span>
+            </span>
+          }
+        >
+          <Menu.Item key="2">쓰기</Menu.Item>
+          <Menu.Item key="3">보기</Menu.Item>
+        </SubMenu>
+        </div>
+      )
+    }else{
+      nav =(
+        <div>
+          <Menu.Item key="1">
+          <Icon type="user" />
+          <span><Link to="/login">로그인</Link></span>
+        </Menu.Item>
+        <Menu.Item key="2">
+          <Icon type="usergroup-add" />
+          <span><Link to="/userRegister">회원가입</Link></span>
+        </Menu.Item>
+        <SubMenu
+          key="sub1"
+          title={
+            <span>
+              <Icon type="read" />
+              <span>일기</span>
+            </span>
+          }
+        >
+          <Menu.Item key="3">쓰기</Menu.Item>
+          <Menu.Item key="4">보기</Menu.Item>
+          <Menu.Item key="5">Alex</Menu.Item>
+        </SubMenu>
+        </div>
+      )
+    }
+    return nav
+  }
 
     
   render(){
@@ -205,36 +221,13 @@ class App extends React.Component{
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <div ><Link to="/"><img className="logo" src={logo}></img></Link></div>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1">
-              <Icon type="user" />
-              <span>로그인</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="usergroup-add" />
-              <span>회원가입</span>
-            </Menu.Item>
-            <SubMenu
-              key="sub1"
-              title={
-                <span>
-                  <Icon type="read" />
-                  <span>일기</span>
-                </span>
-              }
-            >
-              <Menu.Item key="3">쓰기</Menu.Item>
-              <Menu.Item key="4">보기</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
-            </SubMenu>
+            {this.loginedNav()}
+            {/*  */}
           </Menu>
         </Sider>
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
             <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
@@ -244,9 +237,11 @@ class App extends React.Component{
                   <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
                   <Route component={NotFound}/>
                 </Switch>
-            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>Bill is a cat.</div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+          <Footer style={{ textAlign: 'center' }}>
+            made my Jung Jong Heon
+            
+            </Footer>
         </Layout>
     </Layout>
     )
