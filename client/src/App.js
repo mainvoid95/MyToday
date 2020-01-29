@@ -203,7 +203,7 @@ class App extends React.Component{
     return(
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-          <div className="logo"><Link to="/"><img src={logo}></img></Link></div>
+          <div ><Link to="/"><img className="logo" src={logo}></img></Link></div>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1">
               <Icon type="user" />
