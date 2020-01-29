@@ -17,6 +17,7 @@ import Weather from './components/Weather';
 import Popup from 'react-popup';
 import github from './GitHub.png';
 import mail from './mail.png';
+import logo from '../public/logo_transparent.png'
 
 // antd 관련 상수들 (ui관련된것들)
 const { Header, Content, Footer, Sider } = Layout;
@@ -202,21 +203,21 @@ class App extends React.Component{
     return(
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-          <div className="logo"><Link to="/">MyToday</Link></div>
+          <div className="logo"><Link to="/"><img src={logo}></img></Link></div>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1">
-              <Icon type="pie-chart" />
+              <Icon type="user" />
               <span>로그인</span>
             </Menu.Item>
             <Menu.Item key="2">
-              <Icon type="desktop" />
+              <Icon type="usergroup-add" />
               <span>회원가입</span>
             </Menu.Item>
             <SubMenu
               key="sub1"
               title={
                 <span>
-                  <Icon type="user" />
+                  <Icon type="read" />
                   <span>일기</span>
                 </span>
               }
@@ -252,40 +253,7 @@ class App extends React.Component{
   }
 }
 
-
 export default App;
 
 
 
-{/* <Layout>
-        <Header>
-          <header>
-                  {this.loginedNav()}
-                  <nav className='clocknav'>
-                      <Clock/>
-                      <Weather/>
-                  </nav>
-              </header>
-        </Header>
-      <Layout>
-        <Sider>Sider</Sider>
-        <Content>
-              <Router>
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
-                    <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
-                    <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
-                    <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>
-                    <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
-                    <Route component={NotFound}/>
-                </Switch>
-              <Popup />
-              </Router>
-          </Content>
-      </Layout>
-      <Footer>
-        <a href="mailto:mainvoid95@gmail.com?Subject=문의사항" target="_top"><img src={mail} className='mailImg'/></a>
-        <a href="https://github.com/mainvoid95/MyToday"><img src={github}className='GithubImg' /></a>
-      </Footer>
-      </Layout> */}
