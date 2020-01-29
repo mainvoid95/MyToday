@@ -16,6 +16,8 @@ import Popup from 'react-popup';
 import github from './GitHub.png';
 import mail from './mail.png';
 
+const { Header, Footer, Sider, Content } = Layout;
+
 
 class App extends React.Component{
   constructor(props){
