@@ -151,57 +151,43 @@ class App extends React.Component{
   });
   } 
 
-  //네비게이터 
-  loginedNav=()=>{
-    let nav = null;
-    if(this.state.is_logined === true){
-      nav = ( 
-        <Menu.Item key="1">
-              {/* <Icon type="pie-chart" /> */}
-              <span><a className='userinfo' onClick={this.userInfoPopup}>{this.state.user_name}</a><br/></span>
-            </Menu.Item>
-        <SubMenu
-          key="sub1"
-          title={
-            <span>
-              <Icon type="user" />
-              <span>일기</span>
-            </span>
-          }
-        >
-          <Menu.Item key="3"><Link to="/journal">쓰기</Link></Menu.Item>
-          <Menu.Item key="4"><Link to='/jouranlview'>기록</Link></Menu.Item>
-          {/* <Menu.Item key="5">Alex</Menu.Item> */}
-        </SubMenu>
-      <SubMenu
-        key="sub2"
-        title={
-          <span>
-            <Icon type="team" />
-            <span>Team</span>
-          </span>
-        }
-      >
-        <Menu.Item key="6">Team 1</Menu.Item>
-        <Menu.Item key="8">Team 2</Menu.Item>
-      </SubMenu>
-      
-      </nav>
-      )
-    }else{
-      nav =(
-        <Menu.Item key="1">
-              {/* <Icon type="pie-chart" /> */}
-              <span><Link to="/userRegister">회원가입</Link></span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              {/* <Icon type="desktop" /> */}
-              <span><Link to="/login">로그인</Link></span>
-        </Menu.Item>
-      )
-    }
-    return nav
-  }
+  // //네비게이터 
+  // loginedNav=()=>{
+  //   let nav = null;
+  //   if(this.state.is_logined === true){
+  //     nav = ( 
+  //       <Menu.Item key="1">
+  //             {/* <Icon type="pie-chart" /> */}
+  //             <span><a className='userinfo' onClick={this.userInfoPopup}>{this.state.user_name}</a><br/></span>
+  //           </Menu.Item>
+  //       <SubMenu
+  //         key="sub1"
+  //         title={
+  //           <span>
+  //             <Icon type="user" />
+  //             <span>일기</span>
+  //           </span>
+  //         }
+  //       >
+  //         <Menu.Item key="3"><Link to="/journal">쓰기</Link></Menu.Item>
+  //         <Menu.Item key="4"><Link to='/jouranlview'>기록</Link></Menu.Item>
+  //         {/* <Menu.Item key="5">Alex</Menu.Item> */}
+  //       </SubMenu>
+  //     )
+  //   }else{
+  //     nav =(
+  //       <Menu.Item key="1">
+  //             {/* <Icon type="pie-chart" /> */}
+  //             <span><Link to="/userRegister">회원가입</Link></span>
+  //           </Menu.Item>
+  //           <Menu.Item key="2">
+  //             {/* <Icon type="desktop" /> */}
+  //             <span><Link to="/login">로그인</Link></span>
+  //       </Menu.Item>
+  //     )
+  //   }
+  //   return nav
+  // }
 
     
   render(){
@@ -236,25 +222,9 @@ class App extends React.Component{
               }
             >
               <Menu.Item key="3">쓰기</Menu.Item>
-              <Menu.Item key="4">Bill</Menu.Item>
+              <Menu.Item key="4">보기</Menu.Item>
               <Menu.Item key="5">Alex</Menu.Item>
             </SubMenu>
-            <SubMenu
-              key="sub2"
-              title={
-                <span>
-                  <Icon type="team" />
-                  <span>Team</span>
-                </span>
-              }
-            >
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
-            </SubMenu>
-            <Menu.Item key="9">
-              <Icon type="file" />
-              <span>File</span>
-            </Menu.Item>
           </Menu>
         </Sider>
         <Layout>
