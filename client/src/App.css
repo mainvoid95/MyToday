@@ -4,6 +4,7 @@
   }
   
   .logo{
+      max-width: 100%;
       align-self: auto;
       color: white;
   }

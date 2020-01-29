@@ -2,6 +2,7 @@
   "name": "mytoday",
   "version": "1.1.0",
   "private": true,
+  "homepage": "https://mytoday.ml",
   "dependencies": {
     "@material-ui/core": "^4.5.0",
     "react": "^16.10.2",
