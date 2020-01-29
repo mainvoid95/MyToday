@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect, Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import './App.css';
+import 'antd/dist/antd.css';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import {get, post} from 'axios';
 import Home from './components/Home';
