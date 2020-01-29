@@ -228,6 +228,12 @@ class App extends React.Component{
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
+            <div style={{
+            background: '#fff',
+            padding: 24,
+            margin: 0,
+            minHeight: 280,
+          }}>
             <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
@@ -235,12 +241,12 @@ class App extends React.Component{
                   <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
                   <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>
                   <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
-                  <Route component={NotFound}/>
                 </Switch>
+            </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             made my Jung Jong Heon
-            
+
             </Footer>
         </Layout>
     </Layout>
