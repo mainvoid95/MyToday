@@ -175,37 +175,40 @@ class App extends React.Component{
       )
     }
     return(
+      <div>
       <Layout>
-        <div>
-          <Router>
-            <header>
-              {this.loginedNav()}
-                <nav className='clocknav'>
-                    <Clock/>
-                    <Weather/>
-                </nav>
-            </header>
-            <div className='warp'>
-              <main className='main'>
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
-                  <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
-                  <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
-                  <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>
-                  <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
-	    	  <Route component={NotFound}/>
-                </Switch>
-                <Popup />
-              </main>
-            </div>
-                <footer className='Mainfooter'>
-                    <a href="mailto:mainvoid95@gmail.com?Subject=문의사항" target="_top"><img src={mail} className='mailImg'/></a>
-                    <a href="https://github.com/mainvoid95/MyToday"><img src={github}className='GithubImg' /></a>
-                </footer>
+        <Header>
+          <header>
+                {this.loginedNav()}
+                  <nav className='clocknav'>
+                      <Clock/>
+                      <Weather/>
+                  </nav>
+              </header>
+        </Header>
+      <Layout>
+        <Sider>Sider</Sider>
+        <Content>
+        <Router>
+          <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
+                <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
+                <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
+                <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>
+                <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
+	    	        <Route component={NotFound}/>
+          </Switch>
           </Router>
-      </div>
+                <Popup />
+                </Content>
       </Layout>
+      <Footer>
+        <a href="mailto:mainvoid95@gmail.com?Subject=문의사항" target="_top"><img src={mail} className='mailImg'/></a>
+        <a href="https://github.com/mainvoid95/MyToday"><img src={github}className='GithubImg' /></a>
+      </Footer>
+      </Layout>
+      </div>
       
     )
   }
