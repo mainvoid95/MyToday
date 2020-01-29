@@ -15,9 +15,9 @@ import NotFound from './components/NotFound';
 import Clock from './components/Clock';
 import Weather from './components/Weather';
 import Popup from 'react-popup';
-import github from './GitHub.png';
-import mail from './mail.png';
-import logo from '../public/logo_transparent.png'
+import github from './img/GitHub.png';
+import mail from './img/mail.png';
+import logo from './img/logo_transparent.png'
 
 // antd 관련 상수들 (ui관련된것들)
 const { Header, Content, Footer, Sider } = Layout;
