@@ -191,18 +191,18 @@ class App extends React.Component{
       <Layout>
         <Sider>Sider</Sider>
         <Content>
-        <Router>
-          <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
-                <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
-                <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
-                <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>
-                <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
-	    	        <Route component={NotFound}/>
-          </Switch>
-          <Popup />
-          </Router>
+              <Router>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
+                    <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
+                    <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
+                    <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>
+                    <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
+                    <Route component={NotFound}/>
+                </Switch>
+              <Popup />
+              </Router>
           </Content>
       </Layout>
       <Footer>
