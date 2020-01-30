@@ -11,12 +11,9 @@ import Login from './components/Login';
 import Jouranl from './components/Journal';
 import JouranlView from './components/JournalView';
 import JournalFix from './components/JournalFix';
-import NotFound from './components/NotFound';
 import Clock from './components/Clock';
 import Weather from './components/Weather';
 import Popup from 'react-popup';
-import github from './img/GitHub.png';
-import mail from './img/mail.png';
 import logo from './img/logo_transparent.png'
 
 // antd 관련 상수들 (ui관련된것들)
@@ -217,39 +214,10 @@ class App extends React.Component{
       )
     }
     return(
-      <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-          <div ><Link to="/"><img className="logo" src={logo}></img></Link></div>
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            {this.loginedNav()}
-            {/*  */}
-          </Menu>
-        </Sider>
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
-          <Content style={{ margin: '0 16px' }}>
-            <div style={{
-            background: '#fff',
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-          }}>
-            <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route path='/login' component={() =><Login stateRefresh={this.stateRefresh} />} />
-                  <Route path="/userRegister" component={() => <UsersRegister stateRefresh={this.stateRefresh} />}/>
-                  <Route path="/journal" component={() => <Jouranl user_number={this.state.user_number} stateRefresh={this.stateRefresh} />} />
-                  <Route path="/jouranlview" component={()=> <JouranlView user_number={this.state.user_number}/>}/>
-                  <Route path='/journalfix/:journalnum' component={(props) => <JournalFix stateRefresh={this.stateRefresh} {...props}/>} />
-                </Switch>
-            </div>
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            made my Jung Jong Heon
-
-            </Footer>
-        </Layout>
-    </Layout>
+      <div>
+        ui 개편 작업 시작.
+        어떤 프레임 워크 써야할지 고민중.
+      </div>
     )
   }
 }
