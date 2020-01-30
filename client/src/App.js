@@ -216,7 +216,7 @@ class App extends React.Component{
     return(
       <div>
         ui 개편 작업 시작.
-        어떤 프레임 워크 써야할지 고민중.
+        어떤 프레임 워크 써야할지 고민중
       </div>
     )
   }
