@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/mainvoid95/MyToday#readme",
   "dependencies": {
-    "antd": "^3.26.7",
+    "@material-ui/core": "^4.9.0",
+    "@material-ui/icons": "^4.5.1",
     "axios": "^0.19.2",
     "bcrypt": "^3.0.7",
     "concurrently": "^4.1.2",
